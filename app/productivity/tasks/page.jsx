@@ -222,11 +222,11 @@ const TaskManagerPage = () => {
           <div className="container mx-auto p-6 space-y-8">
             {/* Header Section */}
             <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <h1 className="text-3xl font-bold tracking-tight">
+              <div className="">
+                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
                   Task Manager
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-sm sm:text-base">
                   Keep track of your projects and stay organized
                 </p>
               </div>
@@ -307,7 +307,7 @@ const TaskManagerPage = () => {
             </div>
 
             {/* Stats Overview */}
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="rounded-lg border bg-card p-4">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-medium text-muted-foreground">
@@ -337,18 +337,7 @@ const TaskManagerPage = () => {
                 </p>
               </div>
 
-              <div className="rounded-lg border bg-card p-4">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-muted-foreground">
-                    In Progress
-                  </div>
-                  <Clock className="h-4 w-4 text-blue-500" />
-                </div>
-                <div className="mt-2 text-2xl font-bold">
-                  {tasks.filter((t) => t.status === "in-progress").length}
-                </div>
-                <p className="text-xs text-muted-foreground">Active tasks</p>
-              </div>
+              
 
               <div className="rounded-lg border bg-card p-4">
                 <div className="flex items-center justify-between">
@@ -393,10 +382,9 @@ const TaskManagerPage = () => {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-7">
+              <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="all">All</TabsTrigger>
                 <TabsTrigger value="todo">Todo</TabsTrigger>
-                <TabsTrigger value="in-progress">In Progress</TabsTrigger>
                 <TabsTrigger value="completed">Completed</TabsTrigger>
                 <TabsTrigger value="high">High</TabsTrigger>
                 <TabsTrigger value="medium">Medium</TabsTrigger>

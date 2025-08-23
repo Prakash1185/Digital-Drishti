@@ -1,4 +1,7 @@
+"use client";
+
 import * as React from "react";
+import { usePathname } from "next/navigation";
 
 import {
   Sidebar,
@@ -53,7 +56,6 @@ const data = {
           title: "Overview",
           url: "/dashboard",
           icon: BarChart3,
-          isActive: true,
         },
       ],
     },
@@ -73,8 +75,8 @@ const data = {
           icon: Salad,
         },
         {
-          title: "Browser History",
-          url: "/digital-mirror/history",
+          title: "Block Sites",
+          url: "/digital-mirror/block-site",
           icon: History,
         },
       ],
@@ -141,7 +143,7 @@ const data = {
         },
         {
           title: "Extension",
-          url: "/settings/extension",
+          url: "/",
           icon: Puzzle,
         },
       ],
@@ -152,6 +154,8 @@ const data = {
 import Link from "next/link";
 
 export function AppSidebar({ ...props }) {
+  const pathname = usePathname();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -191,12 +195,10 @@ export function AppSidebar({ ...props }) {
                     <SidebarMenuSub>
                       {item.items.map((subItem) => {
                         const SubIcon = subItem.icon;
+                        const isActive = pathname === subItem.url;
                         return (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={subItem.isActive}
-                            >
+                            <SidebarMenuSubButton asChild isActive={isActive}>
                               <Link href={subItem.url} className="">
                                 <SubIcon className="mr-2 h-3 w-3" />
                                 {subItem.title}

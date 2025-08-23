@@ -164,7 +164,7 @@ export default function Page() {
           {/* Simple Greeting */}
           <div className="space-y-1">
             <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
-              Good morning, Prakash
+              Welcome, User
             </h1>
             <p className="text-sm text-muted-foreground md:text-base">
               {currentDate} • {currentTime}
@@ -173,8 +173,8 @@ export default function Page() {
 
           {/* Key Metrics Cards */}
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <Card className={"h-32 justify-center"}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0">
                 <CardTitle className="text-xs font-medium md:text-sm">
                   Tasks Completed
                 </CardTitle>
@@ -185,8 +185,8 @@ export default function Page() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <Card className={"h-32 justify-center"}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0">
                 <CardTitle className="text-xs font-medium md:text-sm">
                   Focus Hours
                 </CardTitle>
@@ -197,8 +197,8 @@ export default function Page() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <Card className={"h-32 justify-center"}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
                 <CardTitle className="text-xs font-medium md:text-sm">
                   Mood Score
                 </CardTitle>
@@ -209,8 +209,8 @@ export default function Page() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <Card className={"h-32 justify-center"}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0">
                 <CardTitle className="text-xs font-medium md:text-sm">
                   Screen Time
                 </CardTitle>
