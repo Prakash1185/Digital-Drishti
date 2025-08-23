@@ -67,6 +67,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
 const GoalsPage = () => {
+  // ...existing code...
   const [goals, setGoals] = useState([
     {
       id: 1,
@@ -198,6 +199,7 @@ const GoalsPage = () => {
     { name: "Travel", icon: MapPin },
   ];
 
+  // ...existing functions...
   const addGoal = () => {
     if (!newGoal.title.trim()) return;
 
@@ -421,8 +423,8 @@ const GoalsPage = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <div className="flex items-center gap-2 px-4">
+        <header className="sticky top-0 z-10 flex h-14 sm:h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex items-center gap-2 px-2 sm:px-4">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <ShowBreadCrumb />
@@ -430,28 +432,31 @@ const GoalsPage = () => {
         </header>
 
         <main className="flex-1 overflow-auto">
-          <div className="container mx-auto p-6 space-y-12">
-            {/* Simple Header */}
-            <div className="flex items-center justify-between">
-              <div className="">
-                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Goals & Vision</h1>
-                <p className="text-muted-foreground text-sm sm:text-base">
+          <div className="container mx-auto p-3 sm:p-4 lg:p-6 space-y-6 sm:space-y-8 lg:space-y-12">
+            {/* Responsive Header */}
+            <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+              <div>
+                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">
+                  Goals & Vision
+                </h1>
+                <p className="text-muted-foreground text-sm sm:text-base mt-1">
                   Track your long-term aspirations and build lasting habits
                 </p>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3">
                 <Dialog
                   open={isCountdownDialogOpen}
                   onOpenChange={setIsCountdownDialogOpen}
                 >
                   <DialogTrigger asChild>
-                    <Button variant="outline">
+                    <Button variant="outline" className="w-full sm:w-auto">
                       <Clock className="mr-2 h-4 w-4" />
-                      Add Countdown
+                      <span className="hidden xs:inline">Add Countdown</span>
+                      <span className="xs:hidden">Countdown</span>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent>
+                  <DialogContent className="mx-2 sm:mx-0 max-w-[95vw] sm:max-w-md">
                     <DialogHeader>
                       <DialogTitle>Create Countdown</DialogTitle>
                     </DialogHeader>
@@ -477,8 +482,7 @@ const GoalsPage = () => {
                         }
                         rows={2}
                       />
-                      <div className="grid grid-cols-2 gap-3">
-                        {/* Calendar Date Picker for Countdown */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Popover>
                           <PopoverTrigger asChild>
                             <Button
@@ -537,30 +541,37 @@ const GoalsPage = () => {
                         </Select>
                       </div>
                     </div>
-                    <div className="flex justify-end gap-3">
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
                       <Button
                         variant="outline"
                         onClick={() => setIsCountdownDialogOpen(false)}
+                        className="w-full sm:w-auto"
                       >
                         Cancel
                       </Button>
-                      <Button onClick={addCountdown}>Create</Button>
+                      <Button
+                        onClick={addCountdown}
+                        className="w-full sm:w-auto"
+                      >
+                        Create
+                      </Button>
                     </div>
                   </DialogContent>
                 </Dialog>
 
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <DialogTrigger asChild>
-                    <Button>
+                    <Button className="w-full sm:w-auto">
                       <Plus className="mr-2 h-4 w-4" />
-                      Add Goal
+                      <span className="hidden xs:inline">Add Goal</span>
+                      <span className="xs:hidden">Goal</span>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[500px]">
+                  <DialogContent className="mx-2 sm:mx-0 max-w-[95vw] sm:max-w-[500px]">
                     <DialogHeader>
                       <DialogTitle>Create New Goal</DialogTitle>
                     </DialogHeader>
-                    <div className="grid gap-4 py-4 max-h-[400px] overflow-y-auto">
+                    <div className="grid gap-4 py-4 max-h-[60vh] sm:max-h-[400px] overflow-y-auto">
                       <Input
                         placeholder="Goal title..."
                         value={newGoal.title}
@@ -587,7 +598,7 @@ const GoalsPage = () => {
                         }
                         rows={2}
                       />
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Select
                           value={newGoal.category}
                           onValueChange={(value) =>
@@ -624,8 +635,7 @@ const GoalsPage = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        {/* Calendar Date Picker for Goal */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Popover>
                           <PopoverTrigger asChild>
                             <Button
@@ -703,81 +713,94 @@ const GoalsPage = () => {
                         }
                       />
                     </div>
-                    <div className="flex justify-end gap-3">
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
                       <Button
                         variant="outline"
                         onClick={() => setIsDialogOpen(false)}
+                        className="w-full sm:w-auto"
                       >
                         Cancel
                       </Button>
-                      <Button onClick={addGoal}>Create Goal</Button>
+                      <Button onClick={addGoal} className="w-full sm:w-auto">
+                        Create Goal
+                      </Button>
                     </div>
                   </DialogContent>
                 </Dialog>
               </div>
             </div>
 
-            {/* Clean Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
+            {/* Responsive Stats Grid */}
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+              <div className="rounded-xl border bg-card text-card-foreground shadow p-4 sm:p-6">
                 <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h3 className="tracking-tight text-sm font-medium">
+                  <h3 className="tracking-tight text-xs sm:text-sm font-medium">
                     Total Goals
                   </h3>
-                  <Target className="h-4 w-4 text-muted-foreground" />
+                  <Target className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                 </div>
-                <div className="text-2xl font-bold">{goalStats.total}</div>
+                <div className="text-xl sm:text-2xl font-bold">
+                  {goalStats.total}
+                </div>
                 <p className="text-xs text-muted-foreground">Active goals</p>
               </div>
-              <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
+              <div className="rounded-xl border bg-card text-card-foreground shadow p-4 sm:p-6">
                 <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h3 className="tracking-tight text-sm font-medium">
+                  <h3 className="tracking-tight text-xs sm:text-sm font-medium">
                     Completed
                   </h3>
-                  <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+                  <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                 </div>
-                <div className="text-2xl font-bold">{goalStats.completed}</div>
+                <div className="text-xl sm:text-2xl font-bold">
+                  {goalStats.completed}
+                </div>
                 <p className="text-xs text-muted-foreground">Achieved</p>
               </div>
-              <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
+              <div className="rounded-xl border bg-card text-card-foreground shadow p-4 sm:p-6">
                 <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h3 className="tracking-tight text-sm font-medium">
+                  <h3 className="tracking-tight text-xs sm:text-sm font-medium">
                     In Progress
                   </h3>
-                  <Clock className="h-4 w-4 text-muted-foreground" />
+                  <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                 </div>
-                <div className="text-2xl font-bold">{goalStats.inProgress}</div>
+                <div className="text-xl sm:text-2xl font-bold">
+                  {goalStats.inProgress}
+                </div>
                 <p className="text-xs text-muted-foreground">Active work</p>
               </div>
-              <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
+              <div className="rounded-xl border bg-card text-card-foreground shadow p-4 sm:p-6">
                 <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h3 className="tracking-tight text-sm font-medium">
+                  <h3 className="tracking-tight text-xs sm:text-sm font-medium">
                     Planning
                   </h3>
-                  <Lightbulb className="h-4 w-4 text-muted-foreground" />
+                  <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                 </div>
-                <div className="text-2xl font-bold">{goalStats.planning}</div>
+                <div className="text-xl sm:text-2xl font-bold">
+                  {goalStats.planning}
+                </div>
                 <p className="text-xs text-muted-foreground">Future goals</p>
               </div>
-              <div className="rounded-xl border bg-card text-card-foreground shadow p-6">
+              <div className="rounded-xl border bg-card text-card-foreground shadow p-4 sm:p-6 xs:col-span-2 sm:col-span-1">
                 <div className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h3 className="tracking-tight text-sm font-medium">
+                  <h3 className="tracking-tight text-xs sm:text-sm font-medium">
                     Avg Progress
                   </h3>
-                  <Mountain className="h-4 w-4 text-muted-foreground" />
+                  <Mountain className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                 </div>
-                <div className="text-2xl font-bold">
+                <div className="text-xl sm:text-2xl font-bold">
                   {goalStats.avgProgress}%
                 </div>
                 <p className="text-xs text-muted-foreground">Overall</p>
               </div>
             </div>
 
-            {/* Countdowns Section */}
+            {/* Responsive Countdowns Section */}
             {countdowns.length > 0 && (
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold">Upcoming Events</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <h2 className="text-lg sm:text-xl font-semibold">
+                  Upcoming Events
+                </h2>
+                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                   {countdowns.map((countdown) => {
                     const daysLeft = getDaysRemaining(countdown.targetDate);
                     const isUpcoming = daysLeft <= 7 && daysLeft > 0;
@@ -790,7 +813,7 @@ const GoalsPage = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         whileHover={{ scale: 1.02 }}
-                        className={`relative p-4 rounded-xl border backdrop-blur-sm transition-all duration-300 hover:shadow-lg ${
+                        className={`relative p-3 sm:p-4 rounded-xl border backdrop-blur-sm transition-all duration-300 hover:shadow-lg ${
                           isOverdue
                             ? "border-red-200 bg-gradient-to-br from-red-50 to-red-100 dark:border-red-800/50 dark:from-red-950/30 dark:to-red-950/20"
                             : isToday
@@ -801,9 +824,9 @@ const GoalsPage = () => {
                         }`}
                       >
                         {/* Top Section */}
-                        <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-start justify-between mb-2 sm:mb-3">
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-sm truncate">
+                            <h3 className="font-semibold text-xs sm:text-sm truncate">
                               {countdown.title}
                             </h3>
                             <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
@@ -840,9 +863,9 @@ const GoalsPage = () => {
                         </div>
 
                         {/* Main Counter */}
-                        <div className="text-center mb-3">
+                        <div className="text-center mb-2 sm:mb-3">
                           <div
-                            className={`text-2xl font-bold leading-none ${
+                            className={`text-xl sm:text-2xl font-bold leading-none ${
                               isOverdue
                                 ? "text-red-600 dark:text-red-400"
                                 : isToday
@@ -924,37 +947,51 @@ const GoalsPage = () => {
               </div>
             )}
 
-            {/* Tabs */}
+            {/* Responsive Tabs */}
             <Tabs
               defaultValue="vision"
               value={activeTab}
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="vision">
-                  <Compass className="mr-2 h-4 w-4" />
-                  Overview
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+                <TabsTrigger
+                  value="vision"
+                  className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3"
+                >
+                  <Compass className="h-4 w-4" />
+                  <span className="text-xs sm:text-sm">Overview</span>
                 </TabsTrigger>
-                <TabsTrigger value="journey">
-                  <Mountain className="mr-2 h-4 w-4" />
-                  Journey
+                <TabsTrigger
+                  value="journey"
+                  className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3"
+                >
+                  <Mountain className="h-4 w-4" />
+                  <span className="text-xs sm:text-sm">Journey</span>
                 </TabsTrigger>
-                <TabsTrigger value="areas">
-                  <Lightbulb className="mr-2 h-4 w-4" />
-                  Categories
+                <TabsTrigger
+                  value="areas"
+                  className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3"
+                >
+                  <Lightbulb className="h-4 w-4" />
+                  <span className="text-xs sm:text-sm">Categories</span>
                 </TabsTrigger>
-                <TabsTrigger value="timeline">
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  Timeline
+                <TabsTrigger
+                  value="timeline"
+                  className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-3"
+                >
+                  <CalendarIcon className="h-4 w-4" />
+                  <span className="text-xs sm:text-sm">Timeline</span>
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="vision" className="mt-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  <div className="lg:col-span-2 space-y-6">
-                    <h3 className="text-xl font-semibold">Active Goals</h3>
-                    <div className="grid grid-cols-1 gap-6">
+              <TabsContent value="vision" className="mt-6 sm:mt-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+                  <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+                    <h3 className="text-lg sm:text-xl font-semibold">
+                      Active Goals
+                    </h3>
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6">
                       {goals
                         .filter((g) => g.status !== "completed")
                         .slice(0, 3)
@@ -977,11 +1014,11 @@ const GoalsPage = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-6">
-                    <div className="p-6 rounded-lg border">
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="p-4 sm:p-6 rounded-lg border">
                       <h4 className="font-semibold mb-4">Progress Overview</h4>
                       <div className="text-center">
-                        <div className="text-3xl font-bold mb-2">
+                        <div className="text-2xl sm:text-3xl font-bold mb-2">
                           {goalStats.avgProgress}%
                         </div>
                         <div className="text-sm text-muted-foreground mb-4">
@@ -997,15 +1034,17 @@ const GoalsPage = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="journey" className="mt-8">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-semibold">All Goals</h3>
+              <TabsContent value="journey" className="mt-6 sm:mt-8">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                    <h3 className="text-lg sm:text-xl font-semibold">
+                      All Goals
+                    </h3>
                     <Select
                       value={statusFilter}
                       onValueChange={setStatusFilter}
                     >
-                      <SelectTrigger className="w-40">
+                      <SelectTrigger className="w-full sm:w-40">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -1016,7 +1055,7 @@ const GoalsPage = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                     {filteredGoals.map((goal) => (
                       <GoalCard
                         key={goal.id}
@@ -1038,10 +1077,12 @@ const GoalsPage = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="areas" className="mt-8">
-                <div className="space-y-6">
-                  <h3 className="text-xl font-semibold">Goal Categories</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <TabsContent value="areas" className="mt-6 sm:mt-8">
+                <div className="space-y-4 sm:space-y-6">
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    Goal Categories
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {categories.map((category) => {
                       const categoryGoals = goals.filter(
                         (g) => g.category === category.name
@@ -1059,14 +1100,14 @@ const GoalsPage = () => {
                       return (
                         <div
                           key={category.name}
-                          className="p-6 rounded-lg border"
+                          className="p-4 sm:p-6 rounded-lg border"
                         >
                           <div className="flex items-center gap-3 mb-4">
                             <category.icon className="h-5 w-5" />
                             <h4 className="font-semibold">{category.name}</h4>
                           </div>
                           <div className="space-y-3">
-                            <div className="text-2xl font-bold">
+                            <div className="text-xl sm:text-2xl font-bold">
                               {categoryGoals.length}
                             </div>
                             <div className="text-sm text-muted-foreground">
@@ -1100,10 +1141,12 @@ const GoalsPage = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="timeline" className="mt-8">
-                <div className="space-y-6">
-                  <h3 className="text-xl font-semibold">Goal Timeline</h3>
-                  <div className="space-y-4">
+              <TabsContent value="timeline" className="mt-6 sm:mt-8">
+                <div className="space-y-4 sm:space-y-6">
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    Goal Timeline
+                  </h3>
+                  <div className="space-y-3 sm:space-y-4">
                     {goals
                       .sort(
                         (a, b) =>
@@ -1112,9 +1155,12 @@ const GoalsPage = () => {
                       .map((goal) => {
                         const daysLeft = getDaysRemaining(goal.targetDate);
                         return (
-                          <div key={goal.id} className="p-6 rounded-lg border">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-4">
+                          <div
+                            key={goal.id}
+                            className="p-4 sm:p-6 rounded-lg border"
+                          >
+                            <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                              <div className="flex items-center gap-3 sm:gap-4">
                                 {React.createElement(
                                   getCategoryIcon(goal.category),
                                   {
@@ -1122,7 +1168,7 @@ const GoalsPage = () => {
                                   }
                                 )}
                                 <div>
-                                  <h4 className="font-semibold">
+                                  <h4 className="font-semibold text-sm sm:text-base">
                                     {goal.title}
                                   </h4>
                                   <p className="text-sm text-muted-foreground">
@@ -1133,7 +1179,7 @@ const GoalsPage = () => {
                                   </p>
                                 </div>
                               </div>
-                              <div className="text-right">
+                              <div className="text-left sm:text-right">
                                 <div className="font-medium">
                                   {goal.progress}%
                                 </div>
@@ -1152,14 +1198,14 @@ const GoalsPage = () => {
               </TabsContent>
             </Tabs>
 
-            {/* Edit Dialogs */}
+            {/* Edit Dialogs remain the same but with responsive updates */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-              <DialogContent className="sm:max-w-[500px]">
+              <DialogContent className="mx-2 sm:mx-0 max-w-[95vw] sm:max-w-[500px]">
                 <DialogHeader>
                   <DialogTitle>Edit Goal</DialogTitle>
                 </DialogHeader>
                 {editingGoal && (
-                  <div className="grid gap-4 py-4 max-h-[400px] overflow-y-auto">
+                  <div className="grid gap-4 py-4 max-h-[60vh] sm:max-h-[400px] overflow-y-auto">
                     <Input
                       placeholder="Goal title..."
                       value={editingGoal.title}
@@ -1192,7 +1238,7 @@ const GoalsPage = () => {
                       }
                       rows={2}
                     />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <Select
                         value={editingGoal.category}
                         onValueChange={(value) =>
@@ -1230,7 +1276,6 @@ const GoalsPage = () => {
                       </Select>
                     </div>
 
-                    {/* Calendar Date Picker for Edit Goal */}
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
@@ -1279,14 +1324,17 @@ const GoalsPage = () => {
                     />
                   </div>
                 )}
-                <div className="flex justify-end gap-3">
+                <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
                   <Button
                     variant="outline"
                     onClick={() => setIsEditDialogOpen(false)}
+                    className="w-full sm:w-auto"
                   >
                     Cancel
                   </Button>
-                  <Button onClick={editGoal}>Update</Button>
+                  <Button onClick={editGoal} className="w-full sm:w-auto">
+                    Update
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -1295,7 +1343,7 @@ const GoalsPage = () => {
               open={isEditCountdownDialogOpen}
               onOpenChange={setIsEditCountdownDialogOpen}
             >
-              <DialogContent>
+              <DialogContent className="mx-2 sm:mx-0 max-w-[95vw] sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle>Edit Countdown</DialogTitle>
                 </DialogHeader>
@@ -1323,7 +1371,6 @@ const GoalsPage = () => {
                       rows={2}
                     />
 
-                    {/* Calendar Date Picker for Edit Countdown */}
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
@@ -1361,14 +1408,17 @@ const GoalsPage = () => {
                     </Popover>
                   </div>
                 )}
-                <div className="flex justify-end gap-3">
+                <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
                   <Button
                     variant="outline"
                     onClick={() => setIsEditCountdownDialogOpen(false)}
+                    className="w-full sm:w-auto"
                   >
                     Cancel
                   </Button>
-                  <Button onClick={editCountdown}>Update</Button>
+                  <Button onClick={editCountdown} className="w-full sm:w-auto">
+                    Update
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -1379,7 +1429,7 @@ const GoalsPage = () => {
   );
 };
 
-// Simplified Goal Card
+// Responsive Goal Card
 const GoalCard = ({
   goal,
   onEdit,
@@ -1397,19 +1447,21 @@ const GoalCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="p-6 rounded-lg border"
+      className="p-4 sm:p-6 rounded-lg border"
     >
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-start justify-between">
-          <div className="flex items-start gap-3">
-            <Icon className="h-5 w-5 mt-1" />
-            <div className="space-y-1">
-              <h3 className="font-semibold">{goal.title}</h3>
-              <p className="text-sm text-muted-foreground">
+          <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
+            <Icon className="h-5 w-5 mt-1 flex-shrink-0" />
+            <div className="space-y-1 min-w-0">
+              <h3 className="font-semibold text-sm sm:text-base leading-tight">
+                {goal.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
                 {goal.description}
               </p>
               {goal.vision && detailed && (
-                <p className="text-xs text-muted-foreground italic">
+                <p className="text-xs text-muted-foreground italic line-clamp-2">
                   "{goal.vision}"
                 </p>
               )}
@@ -1417,7 +1469,7 @@ const GoalCard = ({
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="flex-shrink-0">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -1435,7 +1487,7 @@ const GoalCard = ({
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-xs sm:text-sm">
             <span>Progress</span>
             <span>{goal.progress}%</span>
           </div>
@@ -1445,13 +1497,13 @@ const GoalCard = ({
         {goal.milestones.length > 0 && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Milestones</span>
+              <span className="text-xs sm:text-sm font-medium">Milestones</span>
               {goal.milestones.length > 3 && (
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={onToggleExpansion}
-                  className="text-xs"
+                  className="text-xs h-auto p-1"
                 >
                   {isExpanded
                     ? "Show less"
@@ -1464,9 +1516,12 @@ const GoalCard = ({
                 (milestone) => (
                   <div
                     key={milestone.id}
-                    className="flex items-center gap-2 text-sm"
+                    className="flex items-center gap-2 text-xs sm:text-sm"
                   >
-                    <button onClick={() => onToggleMilestone(milestone.id)}>
+                    <button
+                      onClick={() => onToggleMilestone(milestone.id)}
+                      className="flex-shrink-0"
+                    >
                       {milestone.completed ? (
                         <CheckCircle2 className="h-4 w-4 text-green-600" />
                       ) : (
@@ -1474,11 +1529,11 @@ const GoalCard = ({
                       )}
                     </button>
                     <span
-                      className={
+                      className={`line-clamp-1 ${
                         milestone.completed
                           ? "line-through text-muted-foreground"
                           : ""
-                      }
+                      }`}
                     >
                       {milestone.title}
                     </span>
@@ -1489,10 +1544,14 @@ const GoalCard = ({
           </div>
         )}
 
-        <div className="flex items-center justify-between pt-2 border-t">
-          <div className="flex gap-2">
-            <Badge variant="outline">{goal.category}</Badge>
-            <Badge variant="outline">{goal.difficulty}</Badge>
+        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 pt-2 border-t">
+          <div className="flex gap-2 flex-wrap">
+            <Badge variant="outline" className="text-xs">
+              {goal.category}
+            </Badge>
+            <Badge variant="outline" className="text-xs">
+              {goal.difficulty}
+            </Badge>
           </div>
           <span className="text-xs text-muted-foreground">
             Due: {new Date(goal.targetDate).toLocaleDateString()}

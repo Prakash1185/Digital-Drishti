@@ -210,8 +210,8 @@ const TaskManagerPage = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-          <div className="flex items-center gap-2 px-4">
+        <header className="flex h-14 sm:h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+          <div className="flex items-center gap-2 px-3 sm:px-4">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <ShowBreadCrumb />
@@ -219,36 +219,43 @@ const TaskManagerPage = () => {
         </header>
 
         <main className="flex-1 overflow-auto">
-          <div className="container mx-auto p-6 space-y-8">
+          <div className="container mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8">
             {/* Header Section */}
-            <div className="flex items-center justify-between">
-              <div className="">
-                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-lg sm:text-xl font-semibold tracking-tight lg:text-2xl">
                   Task Manager
                 </h1>
-                <p className="text-muted-foreground text-sm sm:text-base">
+                <p className="text-muted-foreground text-xs sm:text-sm lg:text-base">
                   Keep track of your projects and stay organized
                 </p>
               </div>
 
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button>
-                    <Plus className="mr-2 h-4 w-4" />
-                    New Task
+                  <Button
+                    size="sm"
+                    className="h-8 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm"
+                  >
+                    <Plus className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="hidden sm:inline">New Task</span>
+                    <span className="sm:hidden">New</span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[425px] mx-3 sm:mx-0">
                   <DialogHeader>
-                    <DialogTitle>Create new task</DialogTitle>
+                    <DialogTitle className="text-base sm:text-lg">
+                      Create new task
+                    </DialogTitle>
                   </DialogHeader>
-                  <div className="grid gap-4 py-4">
+                  <div className="grid gap-3 sm:gap-4 py-3 sm:py-4">
                     <Input
                       placeholder="Task title..."
                       value={newTask.title}
                       onChange={(e) =>
                         setNewTask({ ...newTask, title: e.target.value })
                       }
+                      className="text-xs sm:text-sm h-9 sm:h-10"
                     />
                     <Textarea
                       placeholder="Add description..."
@@ -260,15 +267,16 @@ const TaskManagerPage = () => {
                         })
                       }
                       rows={3}
+                      className="text-xs sm:text-sm resize-none"
                     />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <Select
                         value={newTask.priority}
                         onValueChange={(value) =>
                           setNewTask({ ...newTask, priority: value })
                         }
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="h-9 sm:h-10 text-xs sm:text-sm">
                           <SelectValue placeholder="Priority" />
                         </SelectTrigger>
                         <SelectContent>
@@ -283,6 +291,7 @@ const TaskManagerPage = () => {
                         onChange={(e) =>
                           setNewTask({ ...newTask, category: e.target.value })
                         }
+                        className="text-xs sm:text-sm h-9 sm:h-10"
                       />
                     </div>
                     <Input
@@ -291,42 +300,53 @@ const TaskManagerPage = () => {
                       onChange={(e) =>
                         setNewTask({ ...newTask, dueDate: e.target.value })
                       }
+                      className="text-xs sm:text-sm h-9 sm:h-10"
                     />
                   </div>
-                  <div className="flex justify-end gap-3">
+                  <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
                     <Button
                       variant="outline"
                       onClick={() => setIsDialogOpen(false)}
+                      size="sm"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
                     >
                       Cancel
                     </Button>
-                    <Button onClick={addTask}>Create Task</Button>
+                    <Button
+                      onClick={addTask}
+                      size="sm"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
+                    >
+                      Create Task
+                    </Button>
                   </div>
                 </DialogContent>
               </Dialog>
             </div>
 
             {/* Stats Overview */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="rounded-lg border bg-card p-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+              <div className="rounded-lg border bg-card p-3 sm:p-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-muted-foreground">
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                     Tasks
                   </div>
-                  <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                  <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                 </div>
-                <div className="mt-2 text-2xl font-bold">{taskStats.total}</div>
+                <div className="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold">
+                  {taskStats.total}
+                </div>
                 <p className="text-xs text-muted-foreground">Total tasks</p>
               </div>
 
-              <div className="rounded-lg border bg-card p-4">
+              <div className="rounded-lg border bg-card p-3 sm:p-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-muted-foreground">
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                     Completed
                   </div>
-                  <CheckCheck className="h-4 w-4 text-emerald-500" />
+                  <CheckCheck className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-500" />
                 </div>
-                <div className="mt-2 text-2xl font-bold">
+                <div className="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold">
                   {taskStats.completed}
                 </div>
                 <p className="text-xs text-muted-foreground">
@@ -337,40 +357,42 @@ const TaskManagerPage = () => {
                 </p>
               </div>
 
-              
-
-              <div className="rounded-lg border bg-card p-4">
+              <div className="rounded-lg border bg-card p-3 sm:p-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-muted-foreground">
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                     High
                   </div>
-                  <Flag className="h-4 w-4 text-red-500" />
+                  <Flag className="h-3 w-3 sm:h-4 sm:w-4 text-red-500" />
                 </div>
-                <div className="mt-2 text-2xl font-bold">{taskStats.high}</div>
+                <div className="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold">
+                  {taskStats.high}
+                </div>
                 <p className="text-xs text-muted-foreground">Critical tasks</p>
               </div>
 
-              <div className="rounded-lg border bg-card p-4">
+              <div className="rounded-lg border bg-card p-3 sm:p-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-muted-foreground">
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                     Medium
                   </div>
-                  <AlertCircle className="h-4 w-4 text-amber-500" />
+                  <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 text-amber-500" />
                 </div>
-                <div className="mt-2 text-2xl font-bold">
+                <div className="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold">
                   {taskStats.medium}
                 </div>
                 <p className="text-xs text-muted-foreground">Important tasks</p>
               </div>
 
-              <div className="rounded-lg border bg-card p-4">
+              <div className="rounded-lg border bg-card p-3 sm:p-4 col-span-2 sm:col-span-1">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium text-muted-foreground">
+                  <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                     Low
                   </div>
-                  <Minus className="h-4 w-4 text-emerald-500" />
+                  <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-500" />
                 </div>
-                <div className="mt-2 text-2xl font-bold">{taskStats.low}</div>
+                <div className="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold">
+                  {taskStats.low}
+                </div>
                 <p className="text-xs text-muted-foreground">Standard tasks</p>
               </div>
             </div>
@@ -382,23 +404,38 @@ const TaskManagerPage = () => {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-6">
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="todo">Todo</TabsTrigger>
-                <TabsTrigger value="completed">Completed</TabsTrigger>
-                <TabsTrigger value="high">High</TabsTrigger>
-                <TabsTrigger value="medium">Medium</TabsTrigger>
-                <TabsTrigger value="low">Low</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto">
+                <TabsTrigger value="all" className="text-xs sm:text-sm py-2">
+                  All
+                </TabsTrigger>
+                <TabsTrigger value="todo" className="text-xs sm:text-sm py-2">
+                  Todo
+                </TabsTrigger>
+                <TabsTrigger
+                  value="completed"
+                  className="text-xs sm:text-sm py-2"
+                >
+                  Done
+                </TabsTrigger>
+                <TabsTrigger value="high" className="text-xs sm:text-sm py-2">
+                  High
+                </TabsTrigger>
+                <TabsTrigger value="medium" className="text-xs sm:text-sm py-2">
+                  Medium
+                </TabsTrigger>
+                <TabsTrigger value="low" className="text-xs sm:text-sm py-2">
+                  Low
+                </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="all" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <TabsContent value="all" className="mt-4 sm:mt-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                   {/* High Priority Column */}
                   <PriorityColumn
                     title="High Priority"
                     tasks={tasksByPriority.high}
                     color="destructive"
-                    icon={<Flag className="h-4 w-4" />}
+                    icon={<Flag className="h-3 w-3 sm:h-4 sm:w-4" />}
                     toggleTask={toggleTask}
                     openEditDialog={openEditDialog}
                     deleteTask={deleteTask}
@@ -409,7 +446,7 @@ const TaskManagerPage = () => {
                     title="Medium Priority"
                     tasks={tasksByPriority.medium}
                     color="secondary"
-                    icon={<AlertCircle className="h-4 w-4" />}
+                    icon={<AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />}
                     toggleTask={toggleTask}
                     openEditDialog={openEditDialog}
                     deleteTask={deleteTask}
@@ -420,7 +457,7 @@ const TaskManagerPage = () => {
                     title="Low Priority"
                     tasks={tasksByPriority.low}
                     color="outline"
-                    icon={<Minus className="h-4 w-4" />}
+                    icon={<Minus className="h-3 w-3 sm:h-4 sm:w-4" />}
                     toggleTask={toggleTask}
                     openEditDialog={openEditDialog}
                     deleteTask={deleteTask}
@@ -437,7 +474,7 @@ const TaskManagerPage = () => {
                 "medium",
                 "low",
               ].map((tab) => (
-                <TabsContent key={tab} value={tab} className="mt-6">
+                <TabsContent key={tab} value={tab} className="mt-4 sm:mt-6">
                   <TaskList
                     tasks={filteredTasks}
                     toggleTask={toggleTask}
@@ -451,12 +488,14 @@ const TaskManagerPage = () => {
 
             {/* Edit Task Dialog */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-              <DialogContent className="sm:max-w-[425px]">
+              <DialogContent className="sm:max-w-[425px] mx-3 sm:mx-0">
                 <DialogHeader>
-                  <DialogTitle>Edit task</DialogTitle>
+                  <DialogTitle className="text-base sm:text-lg">
+                    Edit task
+                  </DialogTitle>
                 </DialogHeader>
                 {editingTask && (
-                  <div className="grid gap-4 py-4">
+                  <div className="grid gap-3 sm:gap-4 py-3 sm:py-4">
                     <Input
                       placeholder="Task title..."
                       value={editingTask.title}
@@ -466,6 +505,7 @@ const TaskManagerPage = () => {
                           title: e.target.value,
                         })
                       }
+                      className="text-xs sm:text-sm h-9 sm:h-10"
                     />
                     <Textarea
                       placeholder="Add description..."
@@ -477,15 +517,16 @@ const TaskManagerPage = () => {
                         })
                       }
                       rows={3}
+                      className="text-xs sm:text-sm resize-none"
                     />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <Select
                         value={editingTask.priority}
                         onValueChange={(value) =>
                           setEditingTask({ ...editingTask, priority: value })
                         }
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="h-9 sm:h-10 text-xs sm:text-sm">
                           <SelectValue placeholder="Priority" />
                         </SelectTrigger>
                         <SelectContent>
@@ -503,6 +544,7 @@ const TaskManagerPage = () => {
                             category: e.target.value,
                           })
                         }
+                        className="text-xs sm:text-sm h-9 sm:h-10"
                       />
                     </div>
                     <Input
@@ -514,17 +556,26 @@ const TaskManagerPage = () => {
                           dueDate: e.target.value,
                         })
                       }
+                      className="text-xs sm:text-sm h-9 sm:h-10"
                     />
                   </div>
                 )}
-                <div className="flex justify-end gap-3">
+                <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
                   <Button
                     variant="outline"
                     onClick={() => setIsEditDialogOpen(false)}
+                    size="sm"
+                    className="h-9 sm:h-10 text-xs sm:text-sm"
                   >
                     Cancel
                   </Button>
-                  <Button onClick={editTask}>Update Task</Button>
+                  <Button
+                    onClick={editTask}
+                    size="sm"
+                    className="h-9 sm:h-10 text-xs sm:text-sm"
+                  >
+                    Update Task
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -546,15 +597,17 @@ const PriorityColumn = ({
   deleteTask,
 }) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {icon}
-          <h2 className="font-semibold">{title}</h2>
+          <h2 className="font-semibold text-sm sm:text-base">{title}</h2>
         </div>
-        <Badge variant={color}>{tasks.length}</Badge>
+        <Badge variant={color} className="text-xs">
+          {tasks.length}
+        </Badge>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         <AnimatePresence>
           {tasks.map((task) => (
             <TaskCard
@@ -597,32 +650,32 @@ const TaskCard = ({ task, toggleTask, openEditDialog, deleteTask }) => {
       transition={{ duration: 0.2 }}
       className={`group rounded-lg border-l-4 ${getPriorityColor(
         task.priority
-      )} bg-card p-4 shadow-sm ${task.completed ? "opacity-60" : ""}`}
+      )} bg-card p-3 sm:p-4 shadow-sm ${task.completed ? "opacity-60" : ""}`}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3 sm:gap-4">
         <button
           onClick={() => toggleTask(task.id)}
-          className="mt-1 flex-shrink-0"
+          className="mt-0.5 sm:mt-1 flex-shrink-0"
         >
           {task.completed ? (
-            <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+            <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-500" />
           ) : (
-            <Circle className="h-5 w-5 text-muted-foreground" />
+            <Circle className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
           )}
         </button>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between">
-            <div className="space-y-1">
+            <div className="space-y-1 min-w-0 flex-1">
               <h3
-                className={`font-medium leading-tight ${
+                className={`font-medium leading-tight text-sm sm:text-base ${
                   task.completed ? "line-through text-muted-foreground" : ""
                 }`}
               >
                 {task.title}
               </h3>
               {task.description && (
-                <p className="text-sm text-muted-foreground line-clamp-2">
+                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
                   {task.description}
                 </p>
               )}
@@ -632,28 +685,28 @@ const TaskCard = ({ task, toggleTask, openEditDialog, deleteTask }) => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="h-6 w-6 sm:h-8 sm:w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity ml-2 flex-shrink-0"
                 >
-                  <MoreVertical className="h-4 w-4" />
+                  <MoreVertical className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => openEditDialog(task)}>
-                  <Edit3 className="mr-2 h-4 w-4" />
-                  Edit
+                  <Edit3 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="text-xs sm:text-sm">Edit</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => deleteTask(task.id)}
                   className="text-destructive"
                 >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete
+                  <Trash2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="text-xs sm:text-sm">Delete</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
 
-          <div className="mt-3 flex items-center flex-wrap gap-2">
+          <div className="mt-2 sm:mt-3 flex items-center flex-wrap gap-1 sm:gap-2">
             <Badge variant="secondary" className="text-xs">
               {task.completed
                 ? "Completed"
@@ -664,14 +717,14 @@ const TaskCard = ({ task, toggleTask, openEditDialog, deleteTask }) => {
 
             {task.category && (
               <Badge variant="outline" className="text-xs">
-                <TagIcon className="h-3 w-3 mr-1" />
+                <TagIcon className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
                 {task.category}
               </Badge>
             )}
 
             {task.dueDate && (
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Calendar className="h-3 w-3" />
+                <Calendar className="h-2 w-2 sm:h-3 sm:w-3" />
                 {new Date(task.dueDate).toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -698,7 +751,7 @@ const TaskList = ({
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2 sm:space-y-3">
       <AnimatePresence>
         {tasks.map((task) => (
           <TaskCard
@@ -717,9 +770,9 @@ const TaskList = ({
 // Empty State Component
 const EmptyState = ({ text }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-10 text-center rounded-lg border border-dashed bg-muted/50">
-      <Target className="h-8 w-8 text-muted-foreground mb-2" />
-      <p className="text-sm text-muted-foreground">{text}</p>
+    <div className="flex flex-col items-center justify-center py-8 sm:py-10 text-center rounded-lg border border-dashed bg-muted/50">
+      <Target className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground mb-2" />
+      <p className="text-xs sm:text-sm text-muted-foreground">{text}</p>
     </div>
   );
 };

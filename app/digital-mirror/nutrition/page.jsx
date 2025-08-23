@@ -103,7 +103,7 @@ const DigitalNutritionPage = () => {
       label: "Mental Clarity",
       value: 84,
       delta: +7,
-      icon: <Brain className="h-6 w-6" />,
+      icon: <Brain className="h-5 w-5 sm:h-6 sm:w-6" />,
       description: "Cognitive sharpness and decision-making quality",
       status: "excellent",
       trend: "improving",
@@ -113,7 +113,7 @@ const DigitalNutritionPage = () => {
       label: "Emotional Balance",
       value: 78,
       delta: +5,
-      icon: <Heart className="h-6 w-6" />,
+      icon: <Heart className="h-5 w-5 sm:h-6 sm:w-6" />,
       description: "Mood stability and emotional regulation",
       status: "good",
       trend: "improving",
@@ -123,7 +123,7 @@ const DigitalNutritionPage = () => {
       label: "Focus Quality",
       value: 72,
       delta: +4,
-      icon: <Eye className="h-6 w-6" />,
+      icon: <Eye className="h-5 w-5 sm:h-6 sm:w-6" />,
       description: "Sustained attention and concentration levels",
       status: "good",
       trend: "improving",
@@ -133,7 +133,7 @@ const DigitalNutritionPage = () => {
       label: "Content Nutrition",
       value: 82,
       delta: +9,
-      icon: <Leaf className="h-6 w-6" />,
+      icon: <Leaf className="h-5 w-5 sm:h-6 sm:w-6" />,
       description: "Quality and balance of digital content consumed",
       status: "excellent",
       trend: "improving",
@@ -143,7 +143,7 @@ const DigitalNutritionPage = () => {
       label: "Digital Wellness",
       value: 75,
       delta: +3,
-      icon: <Shield className="h-6 w-6" />,
+      icon: <Shield className="h-5 w-5 sm:h-6 sm:w-6" />,
       description: "Overall healthy digital behavior patterns",
       status: "good",
       trend: "improving",
@@ -153,7 +153,7 @@ const DigitalNutritionPage = () => {
       label: "Sleep Impact",
       value: 68,
       delta: -2,
-      icon: <Moon className="h-6 w-6" />,
+      icon: <Moon className="h-5 w-5 sm:h-6 sm:w-6" />,
       description: "How digital habits affect sleep quality",
       status: "moderate",
       trend: "declining",
@@ -419,73 +419,86 @@ const DigitalNutritionPage = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        {/* Header */}
-        <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="flex items-center gap-2 px-6">
+        {/* Header - Simplified */}
+        <header className="sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex items-center gap-2 px-4 sm:px-6">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <ShowBreadCrumb />
           </div>
-          <div className="ml-auto flex items-center gap-3 px-6">
-          
-
-            <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="7d">Last 7 days</SelectItem>
-                <SelectItem value="14d">Last 14 days</SelectItem>
-                <SelectItem value="30d">Last 30 days</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  <Settings className="h-4 w-4 mr-2" />
-                  Options
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={exportData}>
-                  <Download className="mr-2 h-4 w-4" />
-                  Export Report
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Schedule Review
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <Button onClick={refreshData} disabled={isRefreshing}>
-              {isRefreshing ? (
-                <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-              ) : (
-                <RefreshCw className="h-4 w-4 mr-2" />
-              )}
-              Sync
-            </Button>
-          </div>
         </header>
 
-        <ScrollArea className="flex-1">
-          <main className="container mx-auto p-6 space-y-12">
-            {/* Page Title */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div>
-                  <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+        <main className="flex-1 overflow-auto">
+          <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8 max-w-7xl">
+            {/* Page Title with Action Buttons - Responsive */}
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="space-y-2">
+                  <h1 className="text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl">
                     Digital Nutrition
                   </h1>
-                  <p className="text-sm sm:text-base text-muted-foreground">
+                  <p className="text-sm text-muted-foreground sm:text-base">
                     AI-powered insights for your digital wellness journey
                   </p>
                 </div>
+
+                {/* Action Buttons - Responsive */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                  <Select
+                    value={selectedPeriod}
+                    onValueChange={setSelectedPeriod}
+                  >
+                    <SelectTrigger className="w-full sm:w-32 h-9 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="7d">Last 7 days</SelectItem>
+                      <SelectItem value="14d">Last 14 days</SelectItem>
+                      <SelectItem value="30d">Last 30 days</SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full sm:w-auto h-9 px-3 text-sm"
+                      >
+                        <Settings className="h-4 w-4 mr-2" />
+                        Options
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={exportData}>
+                        <Download className="mr-2 h-4 w-4" />
+                        Export Report
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Calendar className="mr-2 h-4 w-4" />
+                        Schedule Review
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  <Button
+                    onClick={refreshData}
+                    disabled={isRefreshing}
+                    size="sm"
+                    className="w-full sm:w-auto h-9 px-3 text-sm"
+                  >
+                    {isRefreshing ? (
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <RefreshCw className="h-4 w-4 mr-2" />
+                    )}
+                    {isRefreshing ? "Syncing..." : "Sync"}
+                  </Button>
+                </div>
               </div>
 
-              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              {/* Status Indicator */}
+              <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-green-500"></div>
                   <span>
@@ -496,96 +509,96 @@ const DigitalNutritionPage = () => {
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Card className="h-36 justify-center">
-                <CardContent className="p-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              <Card className="h-28 sm:h-36">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">
+                      <p className="text-xs sm:text-sm font-medium text-muted-foreground">
                         Mood Analysis
                       </p>
-                      <p className="text-3xl font-bold">3/4</p>
+                      <p className="text-2xl sm:text-3xl font-bold">3/4</p>
                     </div>
-                    <Target className="h-8 w-8 text-muted-foreground" />
+                    <Target className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                   </div>
-                  <div className="mt-2 text-sm text-muted-foreground">
+                  <div className="mt-2 text-xs sm:text-sm text-muted-foreground">
                     75% completion rate
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="h-36 justify-center">
-                <CardContent className="p-6">
+              <Card className="h-28 sm:h-36">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">
+                      <p className="text-xs sm:text-sm font-medium text-muted-foreground">
                         Active Habits
                       </p>
-                      <p className="text-3xl font-bold">3/4</p>
+                      <p className="text-2xl sm:text-3xl font-bold">3/4</p>
                     </div>
-                    <Target className="h-8 w-8 text-muted-foreground" />
+                    <Target className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                   </div>
-                  <div className="mt-2 text-sm text-muted-foreground">
+                  <div className="mt-2 text-xs sm:text-sm text-muted-foreground">
                     75% completion rate
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="h-36 justify-center">
-                <CardContent className="p-6">
+              <Card className="h-28 sm:h-36">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">
-                        Active Habits
+                      <p className="text-xs sm:text-sm font-medium text-muted-foreground">
+                        Weekly Goals
                       </p>
-                      <p className="text-3xl font-bold">3/4</p>
+                      <p className="text-2xl sm:text-3xl font-bold">2/3</p>
                     </div>
-                    <Target className="h-8 w-8 text-muted-foreground" />
+                    <Target className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                   </div>
-                  <div className="mt-2 text-sm text-muted-foreground">
-                    75% completion rate
+                  <div className="mt-2 text-xs sm:text-sm text-muted-foreground">
+                    67% completion rate
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="h-36 justify-center">
-                <CardContent className="p-6">
+              <Card className="h-28 sm:h-36">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">
-                        Active Habits
+                      <p className="text-xs sm:text-sm font-medium text-muted-foreground">
+                        Wellness Score
                       </p>
-                      <p className="text-3xl font-bold">3/4</p>
+                      <p className="text-2xl sm:text-3xl font-bold">76</p>
                     </div>
-                    <Target className="h-8 w-8 text-muted-foreground" />
+                    <Target className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
                   </div>
-                  <div className="mt-2 text-sm text-muted-foreground">
-                    75% completion rate
+                  <div className="mt-2 text-xs sm:text-sm text-muted-foreground">
+                    Overall health index
                   </div>
                 </CardContent>
               </Card>
             </div>
 
             {/* Wellness Metrics */}
-            <section className="space-y-6">
+            <section className="space-y-4 sm:space-y-6">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-2">
+                <h2 className="text-lg font-bold tracking-tight mb-1 sm:text-xl lg:text-2xl sm:mb-2">
                   Wellness Metrics
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-xs text-muted-foreground sm:text-sm lg:text-base">
                   AI-analyzed scores across key digital wellness dimensions
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {wellnessMetrics.map((metric) => (
                   <Card
                     key={metric.key}
-                    className="group hover:shadow-lg transition-all duration-300 h-72"
+                    className="group hover:shadow-lg transition-all duration-300 h-64 sm:h-72"
                   >
-                    <CardContent className="p-6">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="flex items-start justify-between mb-3 sm:mb-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-green-100 flex items-center justify-center">
                           <span className="text-green-600">{metric.icon}</span>
                         </div>
                         <div className="text-right">
@@ -604,26 +617,29 @@ const DigitalNutritionPage = () => {
                         </div>
                       </div>
 
-                      <div className="space-y-3">
+                      <div className="space-y-2 sm:space-y-3">
                         <div>
-                          <h3 className="text-lg font-semibold">
+                          <h3 className="text-base font-semibold sm:text-lg">
                             {metric.label}
                           </h3>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-xs text-muted-foreground sm:text-sm">
                             {metric.description}
                           </p>
                         </div>
 
                         <div className="space-y-2">
                           <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold">
+                            <span className="text-2xl font-bold sm:text-3xl">
                               {metric.value}
                             </span>
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-xs text-muted-foreground sm:text-sm">
                               /100
                             </span>
                           </div>
-                          <Progress value={metric.value} className="h-3" />
+                          <Progress
+                            value={metric.value}
+                            className="h-2 sm:h-3"
+                          />
                         </div>
 
                         <div className="flex items-center justify-between">
@@ -658,18 +674,18 @@ const DigitalNutritionPage = () => {
             </section>
 
             {/* AI Insights */}
-            <section className="space-y-6">
+            <section className="space-y-4 sm:space-y-6">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-2">
+                <h2 className="text-lg font-bold tracking-tight mb-1 sm:text-xl lg:text-2xl sm:mb-2">
                   AI-Generated Insights
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-xs text-muted-foreground sm:text-sm lg:text-base">
                   Personalized behavioral analysis and recommendations based on
                   your digital patterns
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {aiInsights.map((insight, index) => (
                   <motion.div
                     key={insight.id}
@@ -678,11 +694,11 @@ const DigitalNutritionPage = () => {
                     transition={{ delay: index * 0.1 }}
                   >
                     <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-4">
+                      <CardContent className="p-4 sm:p-6">
+                        <div className="flex items-start gap-3 sm:gap-4">
                           <div
                             className={cn(
-                              "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
+                              "w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0",
                               insight.type === "achievement" &&
                                 "bg-green-100 text-green-600",
                               insight.type === "warning" &&
@@ -694,26 +710,26 @@ const DigitalNutritionPage = () => {
                             )}
                           >
                             {insight.type === "achievement" && (
-                              <Award className="h-6 w-6" />
+                              <Award className="h-5 w-5 sm:h-6 sm:w-6" />
                             )}
                             {insight.type === "warning" && (
-                              <AlertTriangle className="h-6 w-6" />
+                              <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6" />
                             )}
                             {insight.type === "positive" && (
-                              <CheckCircle className="h-6 w-6" />
+                              <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6" />
                             )}
                             {insight.type === "insight" && (
-                              <Lightbulb className="h-6 w-6" />
+                              <Lightbulb className="h-5 w-5 sm:h-6 sm:w-6" />
                             )}
                           </div>
 
-                          <div className="flex-1 space-y-3">
-                            <div className="flex items-start justify-between">
-                              <div>
-                                <h3 className="text-lg font-semibold leading-tight mb-1">
+                          <div className="flex-1 space-y-2 sm:space-y-3">
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
+                              <div className="flex-1">
+                                <h3 className="text-base font-semibold leading-tight mb-1 sm:text-lg">
                                   {insight.title}
                                 </h3>
-                                <p className="text-muted-foreground text-sm">
+                                <p className="text-muted-foreground text-xs sm:text-sm">
                                   {insight.summary}
                                 </p>
                               </div>
@@ -721,14 +737,14 @@ const DigitalNutritionPage = () => {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => toggleInsightExpand(insight.id)}
-                                className="ml-4 flex-shrink-0"
+                                className="self-start sm:ml-4 flex-shrink-0 h-8 px-2 sm:px-3 text-xs sm:text-sm"
                               >
                                 {expandedInsight === insight.id
                                   ? "Collapse"
                                   : "Expand"}
                                 <ChevronRight
                                   className={cn(
-                                    "h-4 w-4 ml-1 transition-transform",
+                                    "h-3 w-3 sm:h-4 sm:w-4 ml-1 transition-transform",
                                     expandedInsight === insight.id &&
                                       "rotate-90"
                                   )}
@@ -736,7 +752,7 @@ const DigitalNutritionPage = () => {
                               </Button>
                             </div>
 
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-1 sm:gap-2">
                               <Badge variant="outline" className="text-xs">
                                 {insight.category}
                               </Badge>
@@ -766,33 +782,33 @@ const DigitalNutritionPage = () => {
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="space-y-4 pt-4 border-t"
+                                className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t"
                               >
                                 <div>
-                                  <h4 className="font-semibold mb-2 flex items-center gap-2">
-                                    <Brain className="h-4 w-4 text-green-600" />
+                                  <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm sm:text-base">
+                                    <Brain className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                                     Detailed Analysis
                                   </h4>
-                                  <p className="text-sm text-muted-foreground leading-relaxed">
+                                  <p className="text-xs text-muted-foreground leading-relaxed sm:text-sm">
                                     {insight.details}
                                   </p>
                                 </div>
 
                                 <div>
-                                  <h4 className="font-semibold mb-3 flex items-center gap-2">
-                                    <Target className="h-4 w-4 text-green-600" />
+                                  <h4 className="font-semibold mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                                    <Target className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                                     Recommended Actions
                                   </h4>
-                                  <div className="space-y-2">
+                                  <div className="space-y-1 sm:space-y-2">
                                     {insight.recommendations.map((rec, idx) => (
                                       <div
                                         key={idx}
-                                        className="flex items-start gap-3"
+                                        className="flex items-start gap-2 sm:gap-3"
                                       >
-                                        <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-medium mt-0.5 flex-shrink-0">
+                                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-medium mt-0.5 flex-shrink-0">
                                           {idx + 1}
                                         </div>
-                                        <p className="text-sm text-muted-foreground">
+                                        <p className="text-xs text-muted-foreground sm:text-sm">
                                           {rec}
                                         </p>
                                       </div>
@@ -801,19 +817,19 @@ const DigitalNutritionPage = () => {
                                 </div>
 
                                 <div>
-                                  <h4 className="font-semibold mb-3 flex items-center gap-2">
-                                    <Activity className="h-4 w-4 text-green-600" />
+                                  <h4 className="font-semibold mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                                    <Activity className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                                     Behavioral Changes Detected
                                   </h4>
-                                  <div className="space-y-2">
+                                  <div className="space-y-1 sm:space-y-2">
                                     {insight.behavioral_changes.map(
                                       (change, idx) => (
                                         <div
                                           key={idx}
                                           className="flex items-start gap-2"
                                         >
-                                          <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                          <span className="text-sm text-muted-foreground">
+                                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                                          <span className="text-xs text-muted-foreground sm:text-sm">
                                             {change}
                                           </span>
                                         </div>
@@ -832,155 +848,49 @@ const DigitalNutritionPage = () => {
               </div>
             </section>
 
-            {/* Micro Habits */}
-            <section className="space-y-6 hidden">
-              <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-2">
-                  Personalized Micro-Habits
-                </h2>
-                <p className="text-muted-foreground">
-                  Small, actionable habits tailored to your behavioral patterns
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {microHabits.map((habit) => {
-                  const isCompleted = completedHabits.includes(habit.id);
-                  return (
-                    <Card
-                      key={habit.id}
-                      className={cn(
-                        "group cursor-pointer transition-all duration-300 hover:shadow-lg",
-                        isCompleted
-                          ? "ring-2 ring-green-200 bg-green-50/50"
-                          : "hover:border-green-200"
-                      )}
-                      onClick={() => toggleHabit(habit.id)}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h3 className="text-lg font-semibold">
-                                {habit.title}
-                              </h3>
-                              <div
-                                className={cn(
-                                  "w-6 h-6 rounded-full flex items-center justify-center",
-                                  isCompleted
-                                    ? "bg-green-600 text-white"
-                                    : "bg-green-100 text-green-600"
-                                )}
-                              >
-                                {isCompleted ? (
-                                  <CheckCircle className="h-4 w-4" />
-                                ) : (
-                                  <Play className="h-3 w-3" />
-                                )}
-                              </div>
-                            </div>
-                            <p className="text-sm text-muted-foreground mb-3">
-                              {habit.description}
-                            </p>
-
-                            <div className="flex items-center gap-4 text-sm">
-                              <div className="flex items-center gap-1">
-                                <Timer className="h-4 w-4 text-green-600" />
-                                <span>{habit.timeInvestment}</span>
-                              </div>
-                              <Badge
-                                variant="outline"
-                                className={cn(
-                                  "text-xs",
-                                  habit.difficulty === "Easy" &&
-                                    "border-green-200 text-green-700",
-                                  habit.difficulty === "Medium" &&
-                                    "border-yellow-200 text-yellow-700",
-                                  habit.difficulty === "Hard" &&
-                                    "border-red-200 text-red-700"
-                                )}
-                              >
-                                {habit.difficulty}
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="space-y-3">
-                          <div className="p-3 rounded-lg bg-green-50 border border-green-100">
-                            <p className="text-sm font-medium text-green-800">
-                              {habit.impact}
-                            </p>
-                          </div>
-
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-muted-foreground">
-                              Streak: {habit.streak}/{habit.targetStreak} days
-                            </span>
-                            <div className="flex gap-1">
-                              {Array.from({ length: habit.targetStreak }).map(
-                                (_, i) => (
-                                  <div
-                                    key={i}
-                                    className={cn(
-                                      "w-2 h-2 rounded-full",
-                                      i < habit.streak
-                                        ? "bg-green-500"
-                                        : "bg-gray-200"
-                                    )}
-                                  />
-                                )
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-            </section>
-
             {/* Weekly Goals */}
-            <section className="space-y-6">
+            <section className="space-y-4 sm:space-y-6">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-2">
+                <h2 className="text-lg font-bold tracking-tight mb-1 sm:text-xl lg:text-2xl sm:mb-2">
                   Weekly Goals
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-xs text-muted-foreground sm:text-sm lg:text-base">
                   Track your progress toward key digital wellness objectives
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                 {weeklyGoals.map((goal) => (
                   <Card
                     key={goal.id}
-                    className="group hover:shadow-lg transition-all duration-300 h-72"
+                    className="group hover:shadow-lg transition-all duration-300 h-64 sm:h-72"
                   >
-                    <CardContent className="p-6">
-                      <div className="space-y-4">
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="space-y-3 sm:space-y-4">
                         <div>
-                          <h3 className="text-lg font-semibold mb-1">
+                          <h3 className="text-base font-semibold mb-1 sm:text-lg">
                             {goal.title}
                           </h3>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-xs text-muted-foreground sm:text-sm">
                             {goal.description}
                           </p>
                         </div>
 
                         <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-bold">
+                          <span className="text-2xl font-bold sm:text-3xl">
                             {goal.current}
                           </span>
-                          <span className="text-muted-foreground">
+                          <span className="text-muted-foreground text-sm">
                             / {goal.target} {goal.unit}
                           </span>
                         </div>
 
                         <div className="space-y-2">
-                          <Progress value={goal.progress} className="h-3" />
-                          <div className="flex justify-between items-center text-sm">
+                          <Progress
+                            value={goal.progress}
+                            className="h-2 sm:h-3"
+                          />
+                          <div className="flex justify-between items-center text-xs sm:text-sm">
                             <Badge
                               variant="secondary"
                               className="text-xs bg-green-100 text-green-700"
@@ -1013,17 +923,17 @@ const DigitalNutritionPage = () => {
             {riskAlerts.filter(
               (alert) => !acknowledgedAlerts.includes(alert.id)
             ).length > 0 && (
-              <section className="space-y-6">
+              <section className="space-y-4 sm:space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold tracking-tight mb-2">
+                  <h2 className="text-lg font-bold tracking-tight mb-1 sm:text-xl lg:text-2xl sm:mb-2">
                     Risk Alerts
                   </h2>
-                  <p className="text-muted-foreground">
+                  <p className="text-xs text-muted-foreground sm:text-sm lg:text-base">
                     Early warning signals that require your attention
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {riskAlerts
                     .filter((alert) => !acknowledgedAlerts.includes(alert.id))
                     .map((alert) => (
@@ -1036,24 +946,24 @@ const DigitalNutritionPage = () => {
                             : "border-l-orange-500"
                         )}
                       >
-                        <CardContent className="p-6">
-                          <div className="flex items-start gap-4">
+                        <CardContent className="p-4 sm:p-6">
+                          <div className="flex items-start gap-3 sm:gap-4">
                             <div
                               className={cn(
-                                "w-10 h-10 rounded-xl flex items-center justify-center",
+                                "w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center",
                                 alert.severity === "high"
                                   ? "bg-red-100 text-red-600"
                                   : "bg-orange-100 text-orange-600"
                               )}
                             >
-                              <AlertTriangle className="h-5 w-5" />
+                              <AlertTriangle className="h-4 w-4 sm:h-5 sm:w-5" />
                             </div>
 
-                            <div className="flex-1 space-y-3">
-                              <div className="flex items-start justify-between">
-                                <div>
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <h3 className="font-semibold text-lg">
+                            <div className="flex-1 space-y-2 sm:space-y-3">
+                              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
+                                <div className="flex-1">
+                                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                                    <h3 className="font-semibold text-base sm:text-lg">
                                       {alert.title}
                                     </h3>
                                     <Badge
@@ -1068,7 +978,7 @@ const DigitalNutritionPage = () => {
                                       {alert.severity} risk
                                     </Badge>
                                   </div>
-                                  <div className="flex items-center gap-2 mb-2">
+                                  <div className="flex flex-wrap items-center gap-2 mb-2">
                                     <Badge
                                       variant="secondary"
                                       className="text-xs"
@@ -1084,18 +994,18 @@ const DigitalNutritionPage = () => {
                                   variant="outline"
                                   size="sm"
                                   onClick={() => acknowledgeAlert(alert.id)}
-                                  className="ml-4"
+                                  className="self-start sm:ml-4 h-8 px-2 sm:px-3 text-xs sm:text-sm"
                                 >
                                   Acknowledge
                                 </Button>
                               </div>
 
-                              <p className="text-muted-foreground text-sm leading-relaxed">
+                              <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
                                 {alert.description}
                               </p>
 
                               <div className="p-3 rounded-lg bg-orange-50 border border-orange-200">
-                                <p className="text-sm">
+                                <p className="text-xs sm:text-sm">
                                   <span className="font-medium text-orange-800">
                                     Suggestion:
                                   </span>{" "}
@@ -1114,18 +1024,18 @@ const DigitalNutritionPage = () => {
             )}
 
             {/* Reflective Prompts */}
-            <section className="space-y-6">
+            <section className="space-y-4 sm:space-y-6">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight mb-2">
+                <h2 className="text-lg font-bold tracking-tight mb-1 sm:text-xl lg:text-2xl sm:mb-2">
                   Reflective Prompts
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-xs text-muted-foreground sm:text-sm lg:text-base">
                   Questions to deepen your self-awareness and digital
                   mindfulness
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 {[
                   "What digital habits served you best today?",
                   "When did you feel most mentally clear and focused?",
@@ -1136,14 +1046,14 @@ const DigitalNutritionPage = () => {
                 ].map((prompt, index) => (
                   <Card
                     key={index}
-                    className="group hover:shadow-md transition-all duration-300 h-16 justify-center"
+                    className="group hover:shadow-md transition-all duration-300 h-20 sm:h-24"
                   >
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600 font-medium text-sm flex-shrink-0">
+                    <CardContent className="p-4 sm:p-6 flex items-center">
+                      <div className="flex items-start gap-2 sm:gap-3">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600 font-medium text-xs sm:text-sm flex-shrink-0">
                           ?
                         </div>
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm">
                           {prompt}
                         </p>
                       </div>
@@ -1152,8 +1062,8 @@ const DigitalNutritionPage = () => {
                 ))}
               </div>
             </section>
-          </main>
-        </ScrollArea>
+          </div>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

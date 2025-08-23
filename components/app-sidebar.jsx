@@ -152,6 +152,7 @@ const data = {
 };
 
 import Link from "next/link";
+import Image from "next/image";
 
 export function AppSidebar({ ...props }) {
   const pathname = usePathname();
@@ -172,6 +173,7 @@ export function AppSidebar({ ...props }) {
               >
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Eye className="size-5" />
+                  {/* <Image src={"/logo.png"} width={50} alt="logo" height={50}/> */}
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-medium text-xl">Digital Drishti</span>

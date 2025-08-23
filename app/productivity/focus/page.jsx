@@ -249,13 +249,13 @@ const FocusPage = () => {
   const getPhaseIcon = (phase) => {
     switch (phase) {
       case "focus":
-        return <Brain className="h-5 w-5" />;
+        return <Brain className="h-4 w-4 sm:h-5 sm:w-5" />;
       case "break":
-        return <Coffee className="h-5 w-5" />;
+        return <Coffee className="h-4 w-4 sm:h-5 sm:w-5" />;
       case "longBreak":
-        return <Zap className="h-5 w-5" />;
+        return <Zap className="h-4 w-4 sm:h-5 sm:w-5" />;
       default:
-        return <Timer className="h-5 w-5" />;
+        return <Timer className="h-4 w-4 sm:h-5 sm:w-5" />;
     }
   };
 
@@ -274,8 +274,8 @@ const FocusPage = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-          <div className="flex items-center gap-2 px-4">
+        <header className="flex h-14 sm:h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+          <div className="flex items-center gap-2 px-3 sm:px-4">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <ShowBreadCrumb />
@@ -283,40 +283,47 @@ const FocusPage = () => {
         </header>
 
         <main className="flex-1 overflow-auto">
-          <div className="container mx-auto p-6 space-y-8">
+          <div className="container mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8">
             {/* Header Section */}
-            <div className="flex items-center justify-between">
-              <div className="">
-                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-lg sm:text-xl font-semibold tracking-tight lg:text-2xl">
                   Focus Timer
                 </h1>
-                <p className="text-muted-foreground text-sm sm:text-base">
+                <p className="text-muted-foreground text-xs sm:text-sm lg:text-base">
                   Create custom focus sessions and boost your productivity
                 </p>
               </div>
 
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button>
-                    <Plus className="mr-2 h-4 w-4" />
-                    New Session
+                  <Button
+                    size="sm"
+                    className="h-8 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm"
+                  >
+                    <Plus className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="hidden sm:inline">New Session</span>
+                    <span className="sm:hidden">New</span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[425px] mx-3 sm:mx-0">
                   <DialogHeader>
-                    <DialogTitle>Create new session</DialogTitle>
+                    <DialogTitle className="text-base sm:text-lg">
+                      Create new session
+                    </DialogTitle>
                   </DialogHeader>
-                  <div className="grid gap-4 py-4">
+                  <div className="grid gap-3 sm:gap-4 py-3 sm:py-4">
                     <Input
                       placeholder="Session name..."
                       value={newSession.name}
                       onChange={(e) =>
                         setNewSession({ ...newSession, name: e.target.value })
                       }
+                      className="text-xs sm:text-sm h-9 sm:h-10"
                     />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-xs sm:text-sm font-medium">
                           Focus (min)
                         </label>
                         <Input
@@ -330,10 +337,11 @@ const FocusPage = () => {
                               focusTime: parseInt(e.target.value) || 25,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-xs sm:text-sm font-medium">
                           Break (min)
                         </label>
                         <Input
@@ -347,12 +355,13 @@ const FocusPage = () => {
                               breakTime: parseInt(e.target.value) || 5,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-xs sm:text-sm font-medium">
                           Long Break (min)
                         </label>
                         <Input
@@ -366,10 +375,13 @@ const FocusPage = () => {
                               longBreakTime: parseInt(e.target.value) || 15,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Rounds</label>
+                        <label className="text-xs sm:text-sm font-medium">
+                          Rounds
+                        </label>
                         <Input
                           type="number"
                           min="1"
@@ -381,18 +393,27 @@ const FocusPage = () => {
                               rounds: parseInt(e.target.value) || 4,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-end gap-3">
+                  <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
                     <Button
                       variant="outline"
                       onClick={() => setIsDialogOpen(false)}
+                      size="sm"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
                     >
                       Cancel
                     </Button>
-                    <Button onClick={addSession}>Create Session</Button>
+                    <Button
+                      onClick={addSession}
+                      size="sm"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
+                    >
+                      Create Session
+                    </Button>
                   </div>
                 </DialogContent>
               </Dialog>
@@ -400,20 +421,20 @@ const FocusPage = () => {
 
             {/* Enhanced Timer Display */}
             {currentSession && (
-              <div className="rounded-xl border bg-gradient-to-br from-card to-card/50 p-8 text-center space-y-6 shadow-sm">
+              <div className="rounded-xl border bg-gradient-to-br from-card to-card/50 p-4 sm:p-6 lg:p-8 text-center space-y-4 sm:space-y-6 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div></div>
-                  <div className="space-y-2">
-                    <h2 className="text-2xl font-bold">
+                  <div className="space-y-1 sm:space-y-2">
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">
                       {currentSession.name}
                     </h2>
                     <div
-                      className={`flex items-center justify-center gap-2 ${getPhaseColor(
+                      className={`flex items-center justify-center gap-1 sm:gap-2 ${getPhaseColor(
                         currentPhase
                       )}`}
                     >
                       {getPhaseIcon(currentPhase)}
-                      <span className="text-lg font-medium capitalize">
+                      <span className="text-sm sm:text-base lg:text-lg font-medium capitalize">
                         {currentPhase === "longBreak"
                           ? "Long Break"
                           : currentPhase}
@@ -424,48 +445,71 @@ const FocusPage = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsFullscreen(true)}
-                    className="h-8 w-8 p-0"
+                    className="h-6 w-6 sm:h-8 sm:w-8 p-0"
                   >
-                    <Maximize className="h-4 w-4" />
+                    <Maximize className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
 
-                <div className="space-y-6">
-                  <div className="text-7xl font-mono font-bold tracking-tight">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="text-4xl sm:text-6xl lg:text-7xl font-mono font-bold tracking-tight">
                     {formatTime(timeLeft)}
                   </div>
-                  <div className="max-w-md mx-auto space-y-2">
-                    <Progress value={getProgress()} className="h-2" />
-                    <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
+                  <div className="max-w-xs sm:max-w-md mx-auto space-y-2">
+                    <Progress value={getProgress()} className="h-1 sm:h-2" />
+                    <div className="flex items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
                       <span>
                         Round {currentRound} of {currentSession.rounds}
                       </span>
-                      <span>•</span>
-                      <span>{Math.round(getProgress())}% complete</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="hidden sm:inline">
+                        {Math.round(getProgress())}% complete
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
                   {timerState === "stopped" || timerState === "paused" ? (
-                    <Button size="lg" onClick={() => startTimer()}>
-                      <Play className="mr-2 h-5 w-5" />
+                    <Button
+                      size="sm"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
+                      onClick={() => startTimer()}
+                    >
+                      <Play className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       {timerState === "paused" ? "Resume" : "Start"}
                     </Button>
                   ) : (
-                    <Button size="lg" variant="outline" onClick={pauseTimer}>
-                      <Pause className="mr-2 h-5 w-5" />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
+                      onClick={pauseTimer}
+                    >
+                      <Pause className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       Pause
                     </Button>
                   )}
-                  <Button size="lg" variant="outline" onClick={resetTimer}>
-                    <RotateCcw className="mr-2 h-5 w-5" />
-                    Reset
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-9 sm:h-10 text-xs sm:text-sm"
+                    onClick={resetTimer}
+                  >
+                    <RotateCcw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="hidden sm:inline">Reset</span>
+                    <span className="sm:hidden">Reset</span>
                   </Button>
                   {timerState !== "stopped" && (
-                    <Button size="lg" variant="outline" onClick={stopTimer}>
-                      <Square className="mr-2 h-5 w-5" />
-                      Stop
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-9 sm:h-10 text-xs sm:text-sm"
+                      onClick={stopTimer}
+                    >
+                      <Square className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="hidden sm:inline">Stop</span>
+                      <span className="sm:hidden">Stop</span>
                     </Button>
                   )}
                 </div>
@@ -479,13 +523,22 @@ const FocusPage = () => {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="sessions">My Sessions</TabsTrigger>
-                <TabsTrigger value="stats">Statistics</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 h-auto">
+                <TabsTrigger
+                  value="sessions"
+                  className="text-xs sm:text-sm py-2"
+                >
+                  <span className="hidden sm:inline">My Sessions</span>
+                  <span className="sm:hidden">Sessions</span>
+                </TabsTrigger>
+                <TabsTrigger value="stats" className="text-xs sm:text-sm py-2">
+                  <span className="hidden sm:inline">Statistics</span>
+                  <span className="sm:hidden">Stats</span>
+                </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="sessions" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <TabsContent value="sessions" className="mt-4 sm:mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   <AnimatePresence>
                     {sessions.map((session) => (
                       <SessionCard
@@ -504,16 +557,16 @@ const FocusPage = () => {
                 )}
               </TabsContent>
 
-              <TabsContent value="stats" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="rounded-xl border bg-card p-6">
+              <TabsContent value="stats" className="mt-4 sm:mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  <div className="rounded-xl border bg-card p-4 sm:p-6">
                     <div className="flex items-center justify-between">
-                      <div className="text-sm font-medium text-muted-foreground">
+                      <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                         Total Sessions
                       </div>
-                      <Target className="h-4 w-4 text-muted-foreground" />
+                      <Target className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                     </div>
-                    <div className="mt-2 text-3xl font-bold">
+                    <div className="mt-1 sm:mt-2 text-xl sm:text-2xl lg:text-3xl font-bold">
                       {sessions.reduce(
                         (acc, session) => acc + session.completedSessions,
                         0
@@ -524,14 +577,14 @@ const FocusPage = () => {
                     </p>
                   </div>
 
-                  <div className="rounded-xl border bg-card p-6">
+                  <div className="rounded-xl border bg-card p-4 sm:p-6">
                     <div className="flex items-center justify-between">
-                      <div className="text-sm font-medium text-muted-foreground">
+                      <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                         Focus Time
                       </div>
-                      <Clock className="h-4 w-4 text-muted-foreground" />
+                      <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                     </div>
-                    <div className="mt-2 text-3xl font-bold">
+                    <div className="mt-1 sm:mt-2 text-xl sm:text-2xl lg:text-3xl font-bold">
                       {Math.round(
                         sessions.reduce(
                           (acc, session) => acc + session.totalFocusTime,
@@ -545,14 +598,14 @@ const FocusPage = () => {
                     </p>
                   </div>
 
-                  <div className="rounded-xl border bg-card p-6">
+                  <div className="rounded-xl border bg-card p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
                     <div className="flex items-center justify-between">
-                      <div className="text-sm font-medium text-muted-foreground">
+                      <div className="text-xs sm:text-sm font-medium text-muted-foreground">
                         Average Session
                       </div>
-                      <Timer className="h-4 w-4 text-muted-foreground" />
+                      <Timer className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                     </div>
-                    <div className="mt-2 text-3xl font-bold">
+                    <div className="mt-1 sm:mt-2 text-xl sm:text-2xl lg:text-3xl font-bold">
                       {sessions.length > 0
                         ? Math.round(
                             sessions.reduce(
@@ -569,24 +622,28 @@ const FocusPage = () => {
                   </div>
                 </div>
 
-                <div className="mt-8 space-y-4">
-                  <h3 className="text-lg font-semibold">Session Performance</h3>
-                  <div className="space-y-3">
+                <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
+                  <h3 className="text-base sm:text-lg font-semibold">
+                    Session Performance
+                  </h3>
+                  <div className="space-y-2 sm:space-y-3">
                     {sessions.map((session) => (
                       <div
                         key={session.id}
-                        className="rounded-xl border bg-card p-4"
+                        className="rounded-xl border bg-card p-3 sm:p-4"
                       >
                         <div className="flex items-center justify-between">
-                          <div className="space-y-1">
-                            <h4 className="font-medium">{session.name}</h4>
-                            <p className="text-sm text-muted-foreground">
+                          <div className="space-y-1 min-w-0 flex-1">
+                            <h4 className="font-medium text-sm sm:text-base truncate">
+                              {session.name}
+                            </h4>
+                            <p className="text-xs sm:text-sm text-muted-foreground">
                               {session.focusTime}min focus • {session.breakTime}
                               min break • {session.rounds} rounds
                             </p>
                           </div>
-                          <div className="text-right space-y-1">
-                            <div className="text-2xl font-bold">
+                          <div className="text-right space-y-1 flex-shrink-0 ml-4">
+                            <div className="text-lg sm:text-xl lg:text-2xl font-bold">
                               {session.completedSessions}
                             </div>
                             <div className="text-xs text-muted-foreground">
@@ -594,12 +651,12 @@ const FocusPage = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
+                        <div className="mt-2 sm:mt-3 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs text-muted-foreground">
                           <span>
                             {Math.round(session.totalFocusTime / 60)}h total
                             focus
                           </span>
-                          <span>•</span>
+                          <span className="hidden sm:inline">•</span>
                           <span>Created {new Date().toLocaleDateString()}</span>
                         </div>
                       </div>
@@ -611,12 +668,14 @@ const FocusPage = () => {
 
             {/* Edit Session Dialog */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-              <DialogContent className="sm:max-w-[425px]">
+              <DialogContent className="sm:max-w-[425px] mx-3 sm:mx-0">
                 <DialogHeader>
-                  <DialogTitle>Edit session</DialogTitle>
+                  <DialogTitle className="text-base sm:text-lg">
+                    Edit session
+                  </DialogTitle>
                 </DialogHeader>
                 {editingSession && (
-                  <div className="grid gap-4 py-4">
+                  <div className="grid gap-3 sm:gap-4 py-3 sm:py-4">
                     <Input
                       placeholder="Session name..."
                       value={editingSession.name}
@@ -626,10 +685,11 @@ const FocusPage = () => {
                           name: e.target.value,
                         })
                       }
+                      className="text-xs sm:text-sm h-9 sm:h-10"
                     />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-xs sm:text-sm font-medium">
                           Focus (min)
                         </label>
                         <Input
@@ -643,10 +703,11 @@ const FocusPage = () => {
                               focusTime: parseInt(e.target.value) || 25,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-xs sm:text-sm font-medium">
                           Break (min)
                         </label>
                         <Input
@@ -660,12 +721,13 @@ const FocusPage = () => {
                               breakTime: parseInt(e.target.value) || 5,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-xs sm:text-sm font-medium">
                           Long Break (min)
                         </label>
                         <Input
@@ -679,10 +741,13 @@ const FocusPage = () => {
                               longBreakTime: parseInt(e.target.value) || 15,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Rounds</label>
+                        <label className="text-xs sm:text-sm font-medium">
+                          Rounds
+                        </label>
                         <Input
                           type="number"
                           min="1"
@@ -694,19 +759,28 @@ const FocusPage = () => {
                               rounds: parseInt(e.target.value) || 4,
                             })
                           }
+                          className="text-xs sm:text-sm h-9 sm:h-10"
                         />
                       </div>
                     </div>
                   </div>
                 )}
-                <div className="flex justify-end gap-3">
+                <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
                   <Button
                     variant="outline"
                     onClick={() => setIsEditDialogOpen(false)}
+                    size="sm"
+                    className="h-9 sm:h-10 text-xs sm:text-sm"
                   >
                     Cancel
                   </Button>
-                  <Button onClick={editSession}>Update Session</Button>
+                  <Button
+                    onClick={editSession}
+                    size="sm"
+                    className="h-9 sm:h-10 text-xs sm:text-sm"
+                  >
+                    Update Session
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -761,45 +835,47 @@ const FullscreenTimer = React.memo(
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center"
+      className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center p-4"
     >
       <Button
         variant="ghost"
         size="sm"
         onClick={onClose}
-        className="absolute top-4 right-4 h-8 w-8 p-0"
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 h-8 w-8 p-0"
       >
         <X className="h-4 w-4" />
       </Button>
 
-      <div className="text-center space-y-8">
-        <div className="space-y-4">
-          <h2 className="text-4xl font-bold">{currentSession?.name}</h2>
+      <div className="text-center space-y-6 sm:space-y-8 max-w-2xl mx-auto">
+        <div className="space-y-3 sm:space-y-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+            {currentSession?.name}
+          </h2>
           <div
-            className={`flex items-center justify-center gap-3 ${getPhaseColor(
+            className={`flex items-center justify-center gap-2 sm:gap-3 ${getPhaseColor(
               currentPhase
             )}`}
           >
             {getPhaseIcon(currentPhase)}
-            <span className="text-2xl font-medium capitalize">
+            <span className="text-lg sm:text-xl lg:text-2xl font-medium capitalize">
               {currentPhase === "longBreak" ? "Long Break" : currentPhase}
             </span>
           </div>
         </div>
 
-        <div className="space-y-6">
-          <div className="text-8xl font-mono font-bold">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="text-6xl sm:text-7xl lg:text-8xl font-mono font-bold">
             {formatTime(timeLeft)}
           </div>
-          <div className="w-96 mx-auto">
+          <div className="w-80 sm:w-96 mx-auto">
             <Progress value={getProgress()} className="h-2" />
           </div>
-          <div className="text-xl text-muted-foreground">
+          <div className="text-lg sm:text-xl text-muted-foreground">
             Round {currentRound} of {currentSession?.rounds}
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           {timerState === "stopped" || timerState === "paused" ? (
             <Button size="lg" onClick={onStart}>
               <Play className="mr-2 h-5 w-5" />
@@ -835,15 +911,17 @@ const SessionCard = ({ session, isActive, onStart, onEdit, onDelete }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.2 }}
-      className={`group rounded-xl border bg-card p-4 shadow-sm ${
+      className={`group rounded-xl border bg-card p-3 sm:p-4 shadow-sm ${
         isActive ? "ring-2 ring-primary bg-primary/5" : ""
       }`}
     >
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <h3 className="font-medium leading-tight">{session.name}</h3>
-            <div className="text-sm text-muted-foreground">
+          <div className="space-y-1 min-w-0 flex-1">
+            <h3 className="font-medium leading-tight text-sm sm:text-base truncate">
+              {session.name}
+            </h3>
+            <div className="text-xs sm:text-sm text-muted-foreground">
               {session.focusTime}min focus • {session.breakTime}min break
             </div>
           </div>
@@ -852,41 +930,42 @@ const SessionCard = ({ session, isActive, onStart, onEdit, onDelete }) => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="h-6 w-6 sm:h-8 sm:w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
               >
-                <MoreVertical className="h-4 w-4" />
+                <MoreVertical className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={onEdit}>
-                <Edit3 className="mr-2 h-4 w-4" />
-                Edit
+                <Edit3 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">Edit</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={onDelete} className="text-destructive">
-                <Trash2 className="mr-2 h-4 w-4" />
-                Delete
+                <Trash2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm">Delete</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
-            <Target className="h-3 w-3" />
+            <Target className="h-2 w-2 sm:h-3 sm:w-3" />
             {session.rounds} rounds
           </div>
           <div className="flex items-center gap-1">
-            <Timer className="h-3 w-3" />
+            <Timer className="h-2 w-2 sm:h-3 sm:w-3" />
             {session.completedSessions} completed
           </div>
         </div>
 
         <Button
           onClick={onStart}
-          className="w-full"
+          className="w-full h-8 sm:h-9 text-xs sm:text-sm"
           variant={isActive ? "default" : "outline"}
+          size="sm"
         >
-          <Play className="mr-2 h-4 w-4" />
+          <Play className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
           {isActive ? "Continue" : "Start Session"}
         </Button>
       </div>
@@ -897,11 +976,13 @@ const SessionCard = ({ session, isActive, onStart, onEdit, onDelete }) => {
 // Empty State Component
 const EmptyState = ({ text }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-12 text-center rounded-xl border border-dashed bg-muted/50 col-span-full">
-      <div className="rounded-full bg-muted p-3 mb-4">
-        <Timer className="h-6 w-6 text-muted-foreground" />
+    <div className="flex flex-col items-center justify-center py-8 sm:py-12 text-center rounded-xl border border-dashed bg-muted/50 col-span-full">
+      <div className="rounded-full bg-muted p-2 sm:p-3 mb-3 sm:mb-4">
+        <Timer className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-muted-foreground" />
       </div>
-      <p className="text-sm text-muted-foreground max-w-sm">{text}</p>
+      <p className="text-xs sm:text-sm text-muted-foreground max-w-sm px-4">
+        {text}
+      </p>
     </div>
   );
 };

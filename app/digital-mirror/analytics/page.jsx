@@ -247,8 +247,8 @@ const ContentAnalyticsPage = () => {
       <AppSidebar />
       <SidebarInset>
         {/* Fixed Header */}
-        <header className="z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="flex items-center gap-2 px-6">
+        <header className="sticky top-0 z-10 flex h-14 sm:h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex items-center gap-2 px-3 sm:px-6">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <ShowBreadCrumb />
@@ -256,25 +256,25 @@ const ContentAnalyticsPage = () => {
         </header>
 
         <ScrollArea className="flex-1">
-          <main className="container mx-auto p-6 space-y-8">
+          <main className="container mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-6 sm:space-y-8">
             {/* Header Section */}
-            <div className="flex items-center justify-between">
-              <div className="">
-                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Content Analytics</h1>
-                <p className="text-muted-foreground text-sm sm:text-base">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <h1 className="text-lg sm:text-xl font-semibold tracking-tight lg:text-2xl">
+                  Content Analytics
+                </h1>
+                <p className="text-muted-foreground text-xs sm:text-sm lg:text-base">
                   AI-powered analysis of your digital content consumption
                   patterns
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                
-
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <Select
                   value={selectedPeriod}
                   onValueChange={setSelectedPeriod}
                 >
-                  <SelectTrigger className="w-32">
+                  <SelectTrigger className="w-28 sm:w-32 h-8 sm:h-9 text-xs sm:text-sm">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -286,9 +286,13 @@ const ContentAnalyticsPage = () => {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <Settings className="h-4 w-4 mr-2" />
-                      Options
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm"
+                    >
+                      <Settings className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Options</span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
@@ -303,36 +307,41 @@ const ContentAnalyticsPage = () => {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Button onClick={refreshData} disabled={isRefreshing}>
+                <Button
+                  onClick={refreshData}
+                  disabled={isRefreshing}
+                  size="sm"
+                  className="h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm"
+                >
                   {isRefreshing ? (
-                    <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                    <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" />
                   ) : (
-                    <RefreshCw className="h-4 w-4 mr-2" />
+                    <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   )}
-                  Refresh Data
+                  <span className="hidden sm:inline">Refresh</span>
                 </Button>
               </div>
             </div>
 
             {/* Stats Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card className={"h-24 justify-center"}>
-                <CardContent className="">
-                  <div className="flex items-center gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+              <Card className="h-20 sm:h-24 justify-center">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: `${colorVariations.lightest}` }}
                     >
                       <Clock
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         style={{ color: colorVariations.primary }}
                       />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">
+                      <div className="text-lg sm:text-xl lg:text-2xl font-bold">
                         {stats.totalHours.toFixed(1)}h
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Total Time
                       </div>
                     </div>
@@ -340,23 +349,23 @@ const ContentAnalyticsPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className={"h-24 justify-center"}>
-                <CardContent className="">
-                  <div className="flex items-center gap-3">
+              <Card className="h-20 sm:h-24 justify-center">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: `${colorVariations.lightest}` }}
                     >
                       <BarChart3
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         style={{ color: colorVariations.primary }}
                       />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">
+                      <div className="text-lg sm:text-xl lg:text-2xl font-bold">
                         {stats.avgEngagement.toFixed(0)}%
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Avg Engagement
                       </div>
                     </div>
@@ -364,23 +373,23 @@ const ContentAnalyticsPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className={"h-24 justify-center"}>
-                <CardContent className="">
-                  <div className="flex items-center gap-3">
+              <Card className="h-20 sm:h-24 justify-center">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: `${colorVariations.lightest}` }}
                     >
                       <Globe
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         style={{ color: colorVariations.primary }}
                       />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">
+                      <div className="text-lg sm:text-xl lg:text-2xl font-bold">
                         {stats.totalWebsites}
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Websites Visited
                       </div>
                     </div>
@@ -388,23 +397,23 @@ const ContentAnalyticsPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className={"h-24 justify-center"}>
-                <CardContent className="">
-                  <div className="flex items-center gap-3">
+              <Card className="h-20 sm:h-24 justify-center">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
                       style={{ backgroundColor: `${colorVariations.lightest}` }}
                     >
                       <Heart
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         style={{ color: colorVariations.primary }}
                       />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">
+                      <div className="text-lg sm:text-xl lg:text-2xl font-bold">
                         {stats.avgSentiment.toFixed(0)}%
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Avg Sentiment
                       </div>
                     </div>
@@ -415,26 +424,26 @@ const ContentAnalyticsPage = () => {
 
             {/* Main Content Engagement Chart - AREA CHART */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-3 sm:pb-4">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base lg:text-lg">
                   <BarChart3
-                    className="h-5 w-5"
+                    className="h-4 w-4 sm:h-5 sm:w-5"
                     style={{ color: colorVariations.primary }}
                   />
                   Content Engagement Trends
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Your content interaction patterns over time
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6">
                 <ChartContainer
                   config={chartConfigs.engagement}
-                  className="h-[400px] w-full"
+                  className="h-[250px] sm:h-[350px] lg:h-[400px] w-full"
                 >
                   <AreaChart
                     data={contentEngagementData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 10, right: 15, left: 10, bottom: 10 }}
                   >
                     <defs>
                       <linearGradient
@@ -498,6 +507,7 @@ const ContentAnalyticsPage = () => {
                       tickLine={false}
                       axisLine={false}
                       tickMargin={8}
+                      fontSize={11}
                       tickFormatter={(value) => {
                         const date = new Date(value);
                         return date.toLocaleDateString("en-US", {
@@ -506,7 +516,7 @@ const ContentAnalyticsPage = () => {
                         });
                       }}
                     />
-                    <YAxis tickLine={false} axisLine={false} />
+                    <YAxis tickLine={false} axisLine={false} fontSize={11} />
                     <ChartTooltip
                       cursor={false}
                       content={<ChartTooltipContent indicator="dot" />}
@@ -540,26 +550,26 @@ const ContentAnalyticsPage = () => {
 
             {/* Sentiment Analysis Chart - LINE CHART */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-3 sm:pb-4">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base lg:text-lg">
                   <Activity
-                    className="h-5 w-5"
+                    className="h-4 w-4 sm:h-5 sm:w-5"
                     style={{ color: colorVariations.primary }}
                   />
                   Sentiment Distribution Over Time
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   How content sentiment varies throughout your browsing sessions
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6">
                 <ChartContainer
                   config={chartConfigs.sentiment}
-                  className="h-[400px] w-full"
+                  className="h-[250px] sm:h-[350px] lg:h-[400px] w-full"
                 >
                   <LineChart
                     data={sentimentTimelineData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 10, right: 15, left: 10, bottom: 10 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis
@@ -567,6 +577,7 @@ const ContentAnalyticsPage = () => {
                       tickLine={false}
                       axisLine={false}
                       tickMargin={8}
+                      fontSize={11}
                       tickFormatter={(value) => {
                         const date = new Date(value);
                         return date.toLocaleDateString("en-US", {
@@ -575,7 +586,7 @@ const ContentAnalyticsPage = () => {
                         });
                       }}
                     />
-                    <YAxis tickLine={false} axisLine={false} />
+                    <YAxis tickLine={false} axisLine={false} fontSize={11} />
                     <ChartTooltip
                       cursor={false}
                       content={<ChartTooltipContent indicator="dot" />}
@@ -624,26 +635,26 @@ const ContentAnalyticsPage = () => {
 
             {/* Hourly Pattern Chart - BAR CHART */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-3 sm:pb-4">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base lg:text-lg">
                   <Eye
-                    className="h-5 w-5"
+                    className="h-4 w-4 sm:h-5 sm:w-5"
                     style={{ color: colorVariations.primary }}
                   />
                   Daily Performance Patterns
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Hourly productivity, engagement, and focus metrics
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6">
                 <ChartContainer
                   config={chartConfigs.hourly}
-                  className="h-[400px] w-full"
+                  className="h-[250px] sm:h-[350px] lg:h-[400px] w-full"
                 >
                   <BarChart
                     data={hourlyPatternData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 10, right: 15, left: 10, bottom: 10 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis
@@ -651,8 +662,9 @@ const ContentAnalyticsPage = () => {
                       tickLine={false}
                       axisLine={false}
                       tickMargin={8}
+                      fontSize={11}
                     />
-                    <YAxis tickLine={false} axisLine={false} />
+                    <YAxis tickLine={false} axisLine={false} fontSize={11} />
                     <ChartTooltip
                       cursor={false}
                       content={<ChartTooltipContent indicator="dot" />}
@@ -680,39 +692,39 @@ const ContentAnalyticsPage = () => {
 
             {/* Enhanced AI Insights */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-3 sm:pb-4">
+                <CardTitle className="flex items-center gap-2 text-sm sm:text-base lg:text-lg">
                   <Zap
-                    className="h-5 w-5"
+                    className="h-4 w-4 sm:h-5 sm:w-5"
                     style={{ color: colorVariations.primary }}
                   />
                   AI-Generated Insights
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Advanced behavioral analysis with actionable recommendations
                 </CardDescription>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-6">
+              <CardContent className="p-3 sm:p-6">
+                <div className="space-y-4 sm:space-y-6">
                   {aiInsights.map((insight, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="group relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br from-background via-background to-muted/30 p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-border"
+                      className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-border/50 bg-gradient-to-br from-background via-background to-muted/30 p-4 sm:p-6 lg:p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-border"
                     >
                       {/* Background Pattern */}
                       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-muted/5 to-muted/10 opacity-50" />
 
                       <div className="relative">
                         {/* Header Section */}
-                        <div className="flex items-start justify-between mb-6">
-                          <div className="flex items-start gap-4">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 sm:mb-6 gap-4">
+                          <div className="flex items-start gap-3 sm:gap-4">
                             {/* Status Icon */}
                             <div
                               className={cn(
-                                "flex h-12 w-12 items-center justify-center rounded-2xl border-2 shadow-sm",
+                                "flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border-2 shadow-sm",
                                 insight.type === "positive" &&
                                   "border-green-200 bg-green-50 text-green-600",
                                 insight.type === "warning" &&
@@ -722,22 +734,22 @@ const ContentAnalyticsPage = () => {
                               )}
                             >
                               {insight.type === "positive" && (
-                                <Award className="h-6 w-6" />
+                                <Award className="h-5 w-5 sm:h-6 sm:w-6" />
                               )}
                               {insight.type === "warning" && (
-                                <AlertTriangle className="h-6 w-6" />
+                                <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6" />
                               )}
                               {insight.type === "insight" && (
-                                <Target className="h-6 w-6" />
+                                <Target className="h-5 w-5 sm:h-6 sm:w-6" />
                               )}
                             </div>
 
                             {/* Title and Category */}
-                            <div className="space-y-2">
-                              <h3 className="text-xl font-semibold text-foreground leading-tight">
+                            <div className="space-y-2 flex-1">
+                              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-tight">
                                 {insight.title}
                               </h3>
-                              <div className="flex items-center gap-2">
+                              <div className="flex flex-wrap items-center gap-2">
                                 <Badge
                                   variant="secondary"
                                   className="text-xs font-medium"
@@ -771,11 +783,11 @@ const ContentAnalyticsPage = () => {
                           </div>
 
                           {/* Metrics Section */}
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-3 sm:gap-3 self-start">
                             <div className="text-right">
                               <div
                                 className={cn(
-                                  "flex items-center gap-1 text-lg font-bold",
+                                  "flex items-center gap-1 text-base sm:text-lg font-bold",
                                   insight.trend === "up"
                                     ? "text-green-600"
                                     : "text-green-600"
@@ -783,9 +795,9 @@ const ContentAnalyticsPage = () => {
                                 style={{ color: colorVariations.primary }}
                               >
                                 {insight.trend === "up" ? (
-                                  <ArrowUpRight className="h-4 w-4" />
+                                  <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
                                 ) : (
-                                  <ArrowDownRight className="h-4 w-4" />
+                                  <ArrowDownRight className="h-3 w-3 sm:h-4 sm:w-4" />
                                 )}
                                 {insight.metric}
                               </div>
@@ -794,7 +806,7 @@ const ContentAnalyticsPage = () => {
                               </div>
                             </div>
                             <div className="text-right">
-                              <div className="text-lg font-bold text-foreground">
+                              <div className="text-base sm:text-lg font-bold text-foreground">
                                 {insight.confidence}%
                               </div>
                               <div className="text-xs text-muted-foreground">
@@ -805,25 +817,25 @@ const ContentAnalyticsPage = () => {
                         </div>
 
                         {/* Description */}
-                        <div className="mb-6">
-                          <p className="text-muted-foreground leading-relaxed text-base">
+                        <div className="mb-4 sm:mb-6">
+                          <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
                             {insight.description}
                           </p>
                         </div>
 
                         {/* Action Item */}
-                        <div className="flex items-start gap-3 rounded-xl border border-border/50 bg-muted/30 p-4">
+                        <div className="flex items-start gap-3 rounded-lg sm:rounded-xl border border-border/50 bg-muted/30 p-3 sm:p-4">
                           <div
-                            className="flex h-8 w-8 items-center justify-center rounded-lg text-white"
+                            className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-md sm:rounded-lg text-white"
                             style={{ backgroundColor: colorVariations.primary }}
                           >
-                            <CheckCircle className="h-4 w-4" />
+                            <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-foreground mb-1">
+                            <h4 className="text-xs sm:text-sm font-semibold text-foreground mb-1">
                               Recommended Action
                             </h4>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-xs sm:text-sm text-muted-foreground">
                               {insight.impact}
                             </p>
                           </div>

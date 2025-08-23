@@ -221,8 +221,8 @@ const MoodTrackerPage = () => {
       <AppSidebar />
       <SidebarInset>
         {/* Fixed Header */}
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="flex items-center gap-2 px-6">
+        <header className="flex h-16 sticky top-0 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex items-center gap-2 px-4 sm:px-6">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <ShowBreadCrumb />
@@ -230,86 +230,104 @@ const MoodTrackerPage = () => {
         </header>
 
         <main className="flex-1 overflow-auto">
-          <div className="container mx-auto p-6 space-y-6">
-            {/* Header Section */}
-            <div className="flex items-center justify-between">
-              <div className="space-y-2">
-                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Mood Analytics</h1>
+          <div className="container mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl">
+            {/* Header Section - Responsive */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="space-y-1 sm:space-y-2">
+                <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+                  Mood Analytics
+                </h1>
                 <p className="text-muted-foreground text-sm sm:text-base">
                   AI-powered insights based on your digital behavior and content
                   consumption
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <Badge variant="outline" className="text-xs">
+              {/* Action Buttons - Responsive Stack */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                <Badge
+                  variant="outline"
+                  className="text-xs shrink-0 self-start sm:self-auto"
+                >
                   <Brain className="h-3 w-3 mr-1" />
                   AI Powered
                 </Badge>
 
-                <Select
-                  value={selectedPeriod}
-                  onValueChange={setSelectedPeriod}
-                >
-                  <SelectTrigger className="w-32">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="7d">Last 7 days</SelectItem>
-                    <SelectItem value="30d">Last 30 days</SelectItem>
-                    <SelectItem value="90d">Last 3 months</SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                  <Select
+                    value={selectedPeriod}
+                    onValueChange={setSelectedPeriod}
+                  >
+                    <SelectTrigger className="w-full sm:w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="7d">Last 7 days</SelectItem>
+                      <SelectItem value="30d">Last 30 days</SelectItem>
+                      <SelectItem value="90d">Last 3 months</SelectItem>
+                    </SelectContent>
+                  </Select>
 
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <Settings className="h-4 w-4 mr-2" />
-                      Options
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem onClick={exportData}>
-                      <Download className="mr-2 h-4 w-4" />
-                      Export Data
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Filter className="mr-2 h-4 w-4" />
-                      Filter Settings
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full sm:w-auto"
+                      >
+                        <Settings className="h-4 w-4 mr-2" />
+                        <span className="sm:inline">Options</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={exportData}>
+                        <Download className="mr-2 h-4 w-4" />
+                        Export Data
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Filter className="mr-2 h-4 w-4" />
+                        Filter Settings
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
 
-                <Button onClick={analyzeUserBehavior} disabled={isAnalyzing}>
-                  {isAnalyzing ? (
-                    <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Brain className="h-4 w-4 mr-2" />
-                  )}
-                  {isAnalyzing ? "Analyzing..." : "Analyze Now"}
-                </Button>
+                  <Button
+                    onClick={analyzeUserBehavior}
+                    disabled={isAnalyzing}
+                    className="w-full sm:w-auto"
+                  >
+                    {isAnalyzing ? (
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <Brain className="h-4 w-4 mr-2" />
+                    )}
+                    {isAnalyzing ? "Analyzing..." : "Analyze Now"}
+                  </Button>
+                </div>
               </div>
             </div>
 
-            {/* Analysis Status */}
+            {/* Analysis Status - Responsive */}
             <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                      <CheckCircle className="h-6 w-6 text-green-600" />
+              <CardContent className="pt-4 sm:pt-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                      <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Analysis Complete</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <h3 className="font-semibold text-sm sm:text-base">
+                        Analysis Complete
+                      </h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         Last updated:{" "}
                         {format(lastAnalysis, "MMM dd, yyyy 'at' HH:mm")}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold">8,247</div>
-                    <div className="text-sm text-muted-foreground">
+                  <div className="text-left sm:text-right">
+                    <div className="text-xl sm:text-2xl font-bold">8,247</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">
                       Data points analyzed
                     </div>
                   </div>
@@ -317,16 +335,16 @@ const MoodTrackerPage = () => {
               </CardContent>
             </Card>
 
-            {/* Main Chart Section */}
+            {/* Main Chart Section - Responsive */}
             <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
+              <CardHeader className="pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <CardTitle className="flex items-center gap-2">
-                      <TrendingUp className="h-5 w-5" />
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                      <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
                       Mood Trends
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">
                       Your emotional well-being patterns over time
                     </CardDescription>
                   </div>
@@ -335,7 +353,7 @@ const MoodTrackerPage = () => {
                       value={selectedChart}
                       onValueChange={setSelectedChart}
                     >
-                      <SelectTrigger className="w-32">
+                      <SelectTrigger className="w-full sm:w-32">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -349,7 +367,7 @@ const MoodTrackerPage = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="h-[300px]">
+                <div className="h-[250px] sm:h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={moodData}>
                       <CartesianGrid
@@ -360,19 +378,20 @@ const MoodTrackerPage = () => {
                         dataKey="date"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12 }}
+                        tick={{ fontSize: 10 }}
                       />
                       <YAxis
                         domain={[0, 10]}
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12 }}
+                        tick={{ fontSize: 10 }}
                       />
                       <Tooltip
                         contentStyle={{
                           backgroundColor: "hsl(var(--background))",
                           border: "1px solid hsl(var(--border))",
                           borderRadius: "8px",
+                          fontSize: "12px",
                         }}
                       />
                       <Area
@@ -389,45 +408,47 @@ const MoodTrackerPage = () => {
               </CardContent>
             </Card>
 
-            {/* Analytics Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Analytics Grid - Responsive */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {/* Content Consumption Analysis */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <PieChartIcon className="h-5 w-5" />
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                    <PieChartIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                     Content Breakdown
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     How you spend your digital time
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="text-center">
-                      <div className="text-3xl font-bold">
+                      <div className="text-2xl sm:text-3xl font-bold">
                         {behaviorAnalysis.screenTime.total}h
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-xs sm:text-sm text-muted-foreground">
                         Daily average
                       </div>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {behaviorAnalysis.screenTime.breakdown.map(
                         (item, index) => (
                           <div
                             key={index}
                             className="flex items-center justify-between"
                           >
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                               <div
-                                className="w-3 h-3 rounded-full"
+                                className="w-3 h-3 rounded-full shrink-0"
                                 style={{ backgroundColor: item.color }}
                               />
-                              <span className="text-sm">{item.category}</span>
+                              <span className="text-xs sm:text-sm truncate">
+                                {item.category}
+                              </span>
                             </div>
-                            <div className="text-sm font-medium">
+                            <div className="text-xs sm:text-sm font-medium shrink-0">
                               {item.hours}h
                             </div>
                           </div>
@@ -440,21 +461,21 @@ const MoodTrackerPage = () => {
 
               {/* Sentiment Analysis */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Heart className="h-5 w-5" />
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                    <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
                     Content Sentiment
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Emotional tone of consumed content
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">Positive</span>
-                        <span className="text-sm font-medium">
+                        <span className="text-xs sm:text-sm">Positive</span>
+                        <span className="text-xs sm:text-sm font-medium">
                           {behaviorAnalysis.contentSentiment.positive}%
                         </span>
                       </div>
@@ -464,8 +485,8 @@ const MoodTrackerPage = () => {
                       />
 
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">Neutral</span>
-                        <span className="text-sm font-medium">
+                        <span className="text-xs sm:text-sm">Neutral</span>
+                        <span className="text-xs sm:text-sm font-medium">
                           {behaviorAnalysis.contentSentiment.neutral}%
                         </span>
                       </div>
@@ -475,8 +496,8 @@ const MoodTrackerPage = () => {
                       />
 
                       <div className="flex items-center justify-between">
-                        <span className="text-sm">Negative</span>
-                        <span className="text-sm font-medium">
+                        <span className="text-xs sm:text-sm">Negative</span>
+                        <span className="text-xs sm:text-sm font-medium">
                           {behaviorAnalysis.contentSentiment.negative}%
                         </span>
                       </div>
@@ -490,19 +511,19 @@ const MoodTrackerPage = () => {
               </Card>
             </div>
 
-            {/* Activity Patterns */}
+            {/* Activity Patterns - Responsive */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Activity className="h-5 w-5" />
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                  <Activity className="h-4 w-4 sm:h-5 sm:w-5" />
                   Daily Activity Patterns
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   How your mood correlates with activity throughout the day
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[200px]">
+                <div className="h-[180px] sm:h-[200px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={behaviorAnalysis.activityPatterns}>
                       <CartesianGrid
@@ -513,18 +534,19 @@ const MoodTrackerPage = () => {
                         dataKey="time"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12 }}
+                        tick={{ fontSize: 10 }}
                       />
                       <YAxis
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 12 }}
+                        tick={{ fontSize: 10 }}
                       />
                       <Tooltip
                         contentStyle={{
                           backgroundColor: "hsl(var(--background))",
                           border: "1px solid hsl(var(--border))",
                           borderRadius: "8px",
+                          fontSize: "12px",
                         }}
                       />
                       <Bar dataKey="activity" fill="#3b82f6" opacity={0.7} />
@@ -535,37 +557,37 @@ const MoodTrackerPage = () => {
               </CardContent>
             </Card>
 
-            {/* Insights and Recommendations */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Insights and Recommendations - Responsive Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {/* AI Insights */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Zap className="h-5 w-5" />
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                    <Zap className="h-4 w-4 sm:h-5 sm:w-5" />
                     AI Insights
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Patterns discovered in your behavior
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {insights.map((insight, index) => (
-                      <div key={index} className="p-4 rounded-lg border">
-                        <div className="flex items-start gap-3">
+                      <div key={index} className="p-3 sm:p-4 rounded-lg border">
+                        <div className="flex items-start gap-2 sm:gap-3">
                           <div
                             className={cn(
-                              "w-2 h-2 rounded-full mt-2",
+                              "w-2 h-2 rounded-full mt-2 shrink-0",
                               insight.type === "positive" && "bg-green-500",
                               insight.type === "warning" && "bg-yellow-500",
                               insight.type === "neutral" && "bg-blue-500"
                             )}
                           />
-                          <div className="flex-1">
-                            <h4 className="font-medium text-sm">
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-medium text-xs sm:text-sm">
                               {insight.title}
                             </h4>
-                            <p className="text-xs text-muted-foreground mt-1">
+                            <p className="text-xs text-muted-foreground mt-1 break-words">
                               {insight.description}
                             </p>
                             <div className="flex items-center justify-between mt-2">
@@ -583,22 +605,22 @@ const MoodTrackerPage = () => {
 
               {/* Recommendations */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Target className="h-5 w-5" />
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                    <Target className="h-4 w-4 sm:h-5 sm:w-5" />
                     Recommendations
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Personalized suggestions for better well-being
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {recommendations.map((rec, index) => (
-                      <div key={index} className="p-4 rounded-lg border">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
+                      <div key={index} className="p-3 sm:p-4 rounded-lg border">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-2">
                               <Badge variant="secondary" className="text-xs">
                                 {rec.category}
                               </Badge>
@@ -611,14 +633,14 @@ const MoodTrackerPage = () => {
                                 {rec.impact} Impact
                               </Badge>
                             </div>
-                            <p className="text-sm">{rec.suggestion}</p>
+                            <p className="text-xs sm:text-sm break-words">
+                              {rec.suggestion}
+                            </p>
                             <p className="text-xs text-muted-foreground mt-1">
                               Expected results in {rec.timeframe}
                             </p>
                           </div>
-                          <Button size="sm" variant="outline">
-                            Apply
-                          </Button>
+                         
                         </div>
                       </div>
                     ))}
@@ -627,41 +649,45 @@ const MoodTrackerPage = () => {
               </Card>
             </div>
 
-            {/* Data Sources */}
+            {/* Data Sources - Responsive Grid */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Eye className="h-5 w-5" />
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                  <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
                   Data Sources
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Information used for mood analysis
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="flex items-center gap-3 p-3 rounded-lg border">
-                    <Globe className="h-5 w-5 text-blue-500" />
-                    <div>
-                      <div className="text-sm font-medium">Browser History</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="flex items-center gap-2 sm:gap-3 p-3 rounded-lg border">
+                    <Globe className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500 shrink-0" />
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-medium truncate">
+                        Browser History
+                      </div>
                       <div className="text-xs text-muted-foreground">
                         2,341 entries
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg border">
-                    <Smartphone className="h-5 w-5 text-green-500" />
-                    <div>
-                      <div className="text-sm font-medium">App Usage</div>
+                  <div className="flex items-center gap-2 sm:gap-3 p-3 rounded-lg border">
+                    <Smartphone className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 shrink-0" />
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-medium truncate">
+                        App Usage
+                      </div>
                       <div className="text-xs text-muted-foreground">
                         47 apps
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg border">
-                    <PlayCircle className="h-5 w-5 text-red-500" />
-                    <div>
-                      <div className="text-sm font-medium">
+                  <div className="flex items-center gap-2 sm:gap-3 p-3 rounded-lg border">
+                    <PlayCircle className="h-4 w-4 sm:h-5 sm:w-5 text-red-500 shrink-0" />
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-medium truncate">
                         Media Consumption
                       </div>
                       <div className="text-xs text-muted-foreground">
@@ -669,10 +695,12 @@ const MoodTrackerPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg border">
-                    <Search className="h-5 w-5 text-purple-500" />
-                    <div>
-                      <div className="text-sm font-medium">Search Queries</div>
+                  <div className="flex items-center gap-2 sm:gap-3 p-3 rounded-lg border">
+                    <Search className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500 shrink-0" />
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-medium truncate">
+                        Search Queries
+                      </div>
                       <div className="text-xs text-muted-foreground">
                         156 searches
                       </div>
