@@ -510,7 +510,7 @@ const DigitalNutritionPage = () => {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              <Card className="h-28 sm:h-36">
+              <Card className="h-28 sm:h-36 justify-center">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -527,7 +527,7 @@ const DigitalNutritionPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="h-28 sm:h-36">
+              <Card className="h-28 sm:h-36 justify-center">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -544,7 +544,7 @@ const DigitalNutritionPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="h-28 sm:h-36">
+              <Card className="h-28 sm:h-36 justify-center">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -561,7 +561,7 @@ const DigitalNutritionPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="h-28 sm:h-36">
+              <Card className="h-28 sm:h-36 justify-center">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -594,7 +594,7 @@ const DigitalNutritionPage = () => {
                 {wellnessMetrics.map((metric) => (
                   <Card
                     key={metric.key}
-                    className="group hover:shadow-lg transition-all duration-300 h-64 sm:h-72"
+                    className="group hover:shadow-lg transition-all duration-300 h-64 sm:h-72 justify-center"
                   >
                     <CardContent className="p-4 sm:p-6">
                       <div className="flex items-start justify-between mb-3 sm:mb-4">
@@ -1046,7 +1046,7 @@ const DigitalNutritionPage = () => {
                 ].map((prompt, index) => (
                   <Card
                     key={index}
-                    className="group hover:shadow-md transition-all duration-300 h-20 sm:h-24"
+                    className="group hover:shadow-md transition-all duration-300 h-20 justify-center"
                   >
                     <CardContent className="p-4 sm:p-6 flex items-center">
                       <div className="flex items-start gap-2 sm:gap-3">
