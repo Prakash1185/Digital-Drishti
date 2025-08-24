@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧠 Digital Drishti
 
-## Getting Started
+> Transform your digital wellness with AI-powered insights and mindful technology habits.
 
-First, run the development server:
+![Digital Drishti Homepage](./homepage.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What is Digital Drishti?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Digital Drishti helps you build a healthier relationship with technology. Break free from mindless scrolling and develop intentional digital habits through intelligent insights and personalized wellness coaching.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🤖 **AI-Powered Analysis** - Smart insights into your digital behavior
+- 👁️ **Real-Time Awareness** - Instant feedback on browsing habits  
+- 🛡️ **Privacy First** - Your data stays secure and private
+- 📊 **Beautiful Analytics** - Visualize your progress with charts
+- 🎯 **Smart Goals** - Achieve personalized wellness targets
 
-## Learn More
+## 📊 Dashboard
 
-To learn more about Next.js, take a look at the following resources:
+![Digital Drishti Dashboard](./dashboard.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Track your digital wellness journey with comprehensive analytics, focus scores, and personalized recommendations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 How It Works
 
-## Deploy on Vercel
+1. **Install** Chrome extension
+2. **Browse** normally while we track patterns
+3. **Analyze** your digital behavior with AI
+4. **Improve** with personalized insights and gentle reminders
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎯 Perfect For
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Students balancing study and breaks
+- Remote workers maintaining focus
+- Anyone reducing screen addiction
+- Families building healthy digital habits
+
+## 🔮 Coming Soon
+
+- Mobile app companion
+- Sleep impact analysis
+- Team workplace analytics
+- Smart break reminders
+
+## 🤝 Contributing
+
+Contributions welcome! Fork the repo, create a feature branch, and submit a pull request.
+
+
+---
+
+**Made with ❤️ for digital wellness**
