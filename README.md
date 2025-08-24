@@ -2,7 +2,7 @@
 
 > Transform your digital wellness with AI-powered insights and mindful technology habits.
 
-![Digital Drishti Homepage](./homepage.png)
+![Digital Drishti Homepage](./public/homepage.png)
 
 ## What is Digital Drishti?
 
@@ -18,7 +18,7 @@ Digital Drishti helps you build a healthier relationship with technology. Break 
 
 ## 📊 Dashboard
 
-![Digital Drishti Dashboard](./dashboard.png)
+![Digital Drishti Dashboard](./public/dashboard.png)
 
 Track your digital wellness journey with comprehensive analytics, focus scores, and personalized recommendations.
 
